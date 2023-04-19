@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FinalProj.Data.I;
+using FinalProj.Data;
 using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models

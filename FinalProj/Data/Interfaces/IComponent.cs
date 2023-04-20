@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace FinalProj.Data.Interfaces
 {
-	internal interface IComponent
+	public interface IComponent
 	{
 		int PartId { get; set; }
 		string PartName { get; set; }
 		int AmountInstock { get; set; }
 		string Condition { get; set; }
-
-
 	}
 }

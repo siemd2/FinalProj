@@ -13,10 +13,14 @@ namespace FinalProj.Data.Models
         private string partName;
         private int amountInstock;
         private string condition;
+        private string arriveDate;
+        private string makeModelYear;
 
         public int PartId { get => partId; set => partId = value; }
         public string PartName { get => partName; set => partName = value; }
         public int AmountInstock { get => amountInstock; set => amountInstock = value; }
         public string Condition { get => condition; set => condition = value; }
-    }
+		public string ArriveDate { get => arriveDate; set => arriveDate = value; }
+		public string MakeModelYear { get => makeModelYear; set => makeModelYear = value; }
+	}
 }

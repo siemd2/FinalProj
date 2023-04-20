@@ -14,25 +14,22 @@ namespace FinalProj.Data.Models
         private int phone;
         private string email;
         private string address;
-        private Vehicle vehicle;
-        private Invoice invoiceHistory;
+
 
         public int UserId { get => id; set => id = value; }
         public string UserName { get => name; set => name = value; }
         public int PhoneNumber { get => phone; set => phone = value; }
         public string Email { get => email; set => email = value; }
         public string Address { get => address; set => address = value; }
-        public Vehicle Vehicle { get => vehicle; set => vehicle = value; }
-        public Invoice InvoiceHistory { get => invoiceHistory; set => invoiceHistory = value; }
 
-        public Customer(int userID, string userName, int phoneNumber, string email, string address, Vehicle vehicle)
+
+        public Customer(int userID, string userName, int phoneNumber, string email, string address)
         {
             id = userID;
             name = userName;
             phone = phoneNumber;
             this.email = email;
             this.address = address;
-            this.vehicle = vehicle;
         }
     }
 }

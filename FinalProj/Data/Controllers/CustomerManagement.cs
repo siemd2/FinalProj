@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FinalProj.Data.Models;
 using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
+
 
 namespace FinalProj.Data.Controllers
 {
@@ -25,26 +25,26 @@ namespace FinalProj.Data.Controllers
             }
             else
             {
-                string connectionString = "Data Source=192.168.56.1; Initial Catalog=FinalProjOOP;User ID=FinalProjOOP;Password=tlsdibbd;";
-                MySqlConnection connection = new MySqlConnection(connectionString);
-                connection.Open();
+				string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
+				SqlConnection connection = new SqlConnection(connectionString);
+				connection.Open();
 
-                string populateDatabaseScript = "INSERT INTO FinalProj_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
-                MySqlCommand command = new MySqlCommand(populateDatabaseScript, connection);                
-				MySqlParameter parameter1 = new MySqlParameter("@CustID", customer.UserId);
+				string populateDatabaseScript = "INSERT INTO FinalProj_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
+				SqlCommand command = new SqlCommand(populateDatabaseScript, connection);
+				SqlParameter parameter1 = new SqlParameter("@CustID", customer.UserId);
 				command.Parameters.Add(parameter1);
-				MySqlParameter parameter2 = new MySqlParameter("@CustName", customer.UserName);
+				SqlParameter parameter2 = new SqlParameter("@CustName", customer.UserName);
 				command.Parameters.Add(parameter2);
-				MySqlParameter parameter3 = new MySqlParameter("@CustPhone", customer.PhoneNumber);
+				SqlParameter parameter3 = new SqlParameter("@CustPhone", customer.PhoneNumber);
 				command.Parameters.Add(parameter3);
-				MySqlParameter parameter4 = new MySqlParameter("@CustEmail", customer.Email);
+				SqlParameter parameter4 = new SqlParameter("@CustEmail", customer.Email);
 				command.Parameters.Add(parameter4);
-				MySqlParameter parameter5 = new MySqlParameter("@CustAddress", customer.Address);
+				SqlParameter parameter5 = new SqlParameter("@CustAddress", customer.Address);
 				command.Parameters.Add(parameter5);
 
-                MySqlDataReader reader = command.ExecuteReader();
-                reader.Close();
-                connection.Close();
+				SqlDataReader reader = command.ExecuteReader();
+				reader.Close();
+				connection.Close();
 			}
         }
 

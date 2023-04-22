@@ -29,7 +29,7 @@ namespace FinalProj.Data.Controllers
 				SqlConnection connection = new SqlConnection(connectionString);
 				connection.Open();
 
-				string populateDatabaseScript = "INSERT INTO FinalProj_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
+				string populateDatabaseScript = "INSERT INTO FP_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
 				SqlCommand command = new SqlCommand(populateDatabaseScript, connection);
 				SqlParameter parameter1 = new SqlParameter("@CustID", customer.UserId);
 				command.Parameters.Add(parameter1);
@@ -46,8 +46,6 @@ namespace FinalProj.Data.Controllers
 				reader.Close();
 				connection.Close();
 			}
-        }
-
-       
+        }       
     }
 }

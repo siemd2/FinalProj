@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FinalProj.Data.Controllers
 {
-	internal class StockQuery
+	public class StockQuery
 	{
+
 	}
 }

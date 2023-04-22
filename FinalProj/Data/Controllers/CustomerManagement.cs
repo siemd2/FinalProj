@@ -46,8 +46,6 @@ namespace FinalProj.Data.Controllers
 				reader.Close();
 				connection.Close();
 			}
-        }
-
-       
+        } 
     }
 }

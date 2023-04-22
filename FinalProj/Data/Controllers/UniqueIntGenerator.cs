@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace FinalProj.Data.Controllers
 {
+	// to call method :
+	// int uniqueId = UniqueIntGenerator.GenerateUniqueInt();
+	// int uniqueId2 = UniqueIntGenerator.GenerateUniqueInt();
+	// etc
 
 	/*
 	SUMMARY:
@@ -21,7 +25,7 @@ namespace FinalProj.Data.Controllers
 		private static readonly HashSet<int> UniqueIntegers = new HashSet<int>();
 		private const int MinValue = 10000;
 		private const int MaxValue = 100000;
-		private static readonly string FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Data\\UniqueIDs.txt");
+		private static readonly string FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Resources\\Assets\\UniqueIDs.txt");
 
 		// populate the HashSet with any previously generated id's from txt storage
 		static UniqueIntGenerator()

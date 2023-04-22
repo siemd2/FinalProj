@@ -13,28 +13,53 @@ namespace FinalProj.Data.Controllers
     {
 		//We need to make a query for this before I can finish this
 		//Query the database for available workticket
-		public WorkTicket QueryWorkTicket()
+		public List<WorkTicket> QueryAllWorkTicket()
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
 			SqlConnection connection = new SqlConnection(connectionString);
 			connection.Open();
 
-			string query = "";
+			string query = "SELECT wt.workticketid, wt.staffid, wt.customerid, wt.serviceid, wt.servicedate, wt.vehiclevin, wt.mmm, c.customername, c.phonenumber, c.email, c.address FROM FP_WORKTICKET WT JOIN FP_CUSTOMER C ON WT.CUSTOMERID = C.CUSTOMERID;";
 			SqlCommand command = new SqlCommand(query, connection);
 			SqlDataReader reader = command.ExecuteReader();
 
+			List<WorkTicket> ticketList = new List<WorkTicket>();
+
+			while (reader.Read())
+			{
+				int workticketId = reader.GetInt32(0);
+				int staffId = reader.GetInt32(1);
+				int customerId = reader.GetInt32(2);
+				int serviceId = reader.GetInt32(3);
+				string serviceDate = reader.GetString(4);
+				int vehicleVin = reader.GetInt32(5);
+				string mmm = reader.GetString(6);
+				string customerName = reader.GetString(7);
+				int custPhone = reader.GetInt32(8);
+				string custEmail = reader.GetString(9);
+				string custAddress = reader.GetString(10);
+
+				WorkTicket ticket = new WorkTicket(workticketId, staffId, customerId, serviceId, serviceDate, vehicleVin, mmm, customerName, custPhone, custEmail, custAddress);
+
+				ticketList.Add(ticket);
+			}
+
+			return ticketList;
 		}
 
 		//A method to update the staffid for the work ticket in the DB
-		public void UpdateWorkTicket(WorkTicket workTicket)
+		public void UpdateWorkTicket(WorkTicket workTicket, int newStaffId)
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
 			SqlConnection connection = new SqlConnection(connectionString);
 			connection.Open();
 
-			string alterDBScript = "";
+			string alterDBScript = "UPDATE FP_WORKTICKET SET STAFFID = @newStaffId WHERE workticketid = @TicketId;";
 			SqlCommand command = new SqlCommand(alterDBScript, connection);
-
+			SqlParameter parameter1 = new SqlParameter("@newStaffId", newStaffId);
+			command.Parameters.Add(parameter1);
+			SqlParameter parameter2 = new SqlParameter("@TicketId", workTicket.TicketId);
+			command.Parameters.Add(parameter2);
 		}
 	}
 }

@@ -23,5 +23,10 @@ namespace FinalProj.Data.Models
         //public VehiclePart VehiclePart { get => vehiclePart; set => vehiclePart = value; }
         public string TimeRequire { get => timeRequire; set => timeRequire = value; }
         public double Cost { get => cost; set => cost = value; }
+
+        public Service(int serviceId)
+        {
+            Id = serviceId;
+        }
     }
 }

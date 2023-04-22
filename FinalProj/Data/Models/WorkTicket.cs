@@ -33,5 +33,16 @@ namespace FinalProj.Data.Models
 			this.service = service;
 			this.serviceDate = serviceDate;
 		}
+
+		public WorkTicket(int taskId, int staffId, int customerId, int serviceId, string serviceDate, int vehicleVin, string mmm, 
+			string customerName, int phoneNumber, string email, string address)
+		{
+			this.taskId = taskId;
+			Vehicle = new Vehicle(vehicleVin, mmm);
+			Customer = new Customer(customerId, customerName, phoneNumber, email, address);
+			this.staffId = staffId;
+			Service = new Service(serviceId);
+			ServiceDate = serviceDate;
+		}
 	}
 }

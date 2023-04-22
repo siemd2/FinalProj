@@ -30,5 +30,12 @@ namespace FinalProj.Data.Models
             this.email = email;
             this.address = address;
         }
-    }
+		public Customer(int userID, string userName, int phoneNumber, string email)
+		{
+			id = userID;
+			name = userName;
+			phone = phoneNumber;
+			this.email = email;
+		}
+	}
 }

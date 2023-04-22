@@ -10,12 +10,14 @@ namespace FinalProj.Data.Controllers
 {
 	public class WorkBooking
 	{
+		//Create a new work ticket by taking parameter from the front end
 		public WorkTicket CreateBookingProfile(int ticketId, int staffID, Service service, Vehicle vehicle, string date, Customer customer, string serviceDate)
 		{
 			WorkTicket newTask = new WorkTicket(ticketId, vehicle, customer, staffID, service, serviceDate);
 			return newTask;
 		}
 
+		//Receive a WorkTicket Object and Format it into a sql script to save to the DB
 		public void SaveTicketToDatabase(WorkTicket ticket)
 		{
 			if (ticket == null)
@@ -29,7 +31,7 @@ namespace FinalProj.Data.Controllers
 				SqlConnection connection = new SqlConnection(connectionString);
 				connection.Open();
 
-				string populateDatabaseScript = "INSERT INTO FP_WorkOrder VALUES (@WorkOrderID, @StaffID, @CustomerID, @ServiceID, @ServiceDate);";
+				string populateDatabaseScript = "INSERT INTO FP_Workticket VALUES (@WorkOrderID, @StaffID, @CustomerID, @ServiceID, @ServiceDate);";
 				SqlCommand command = new SqlCommand(populateDatabaseScript, connection);
 				SqlParameter parameter1 = new SqlParameter("@WorkOrderID", ticket.TicketId);
 				command.Parameters.Add(parameter1);

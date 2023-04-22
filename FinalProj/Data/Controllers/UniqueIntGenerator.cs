@@ -18,14 +18,14 @@ namespace FinalProj.Data.Controllers
 	The class uses a HashSet to store the previously generated integers and saves the list to a text file on disk whenever a new integer is generated. 
 	The class also loads the list from the text file when the program starts up, ensuring previously generated integers persist when the program exits.
 	*/
-	internal class UniqueIntGenerator
+	public class UniqueIntGenerator
 	{
-		// declare new random, new hashset, min and max values, and filepath for txt storage
-		private static readonly Random Random = new Random();
-		private static readonly HashSet<int> UniqueIntegers = new HashSet<int>();
+		// instantiate new random, new hashset, declare min and max values for IDs, and filepath for txt storage
+		private static Random Random = new Random();
+		public static HashSet<int> UniqueIntegers = new HashSet<int>();
 		private const int MinValue = 10000;
 		private const int MaxValue = 100000;
-		private static readonly string FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Resources\\Assets\\UniqueIDs.txt");
+		public static string FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Resources\\Assets\\UniqueIDs.txt");
 
 		// populate the HashSet with any previously generated id's from txt storage
 		static UniqueIntGenerator()
@@ -49,7 +49,7 @@ namespace FinalProj.Data.Controllers
 		}
 
 		// Load integers from the text file into the HashSet
-		private static void LoadHashSet()
+		public static void LoadHashSet()
 		{
 			// Read the text file and populate the HashSet with the integers
 			string[] lines = File.ReadAllLines(FilePath);
@@ -63,7 +63,7 @@ namespace FinalProj.Data.Controllers
 		}
 
 		// Save unique integers from the HashSet to the text file
-		private static void SaveHashSet()
+		public static void SaveHashSet()
 		{
 			File.WriteAllLines(FilePath, UniqueIntegers.ToStringArray());
 		}

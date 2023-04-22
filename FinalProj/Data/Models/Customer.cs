@@ -15,7 +15,6 @@ namespace FinalProj.Data.Models
         private string email;
         private string address;
 
-
         public int UserId { get => id; set => id = value; }
         public string UserName { get => name; set => name = value; }
         public int PhoneNumber { get => phone; set => phone = value; }

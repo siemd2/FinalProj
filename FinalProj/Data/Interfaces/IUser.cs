@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalProj.Data.Interfaces
 {
+	//Intend for the human parts of the system aka Staff, Customer, Admin
 	public interface IUser
 	{
 		int UserId { get; set; }

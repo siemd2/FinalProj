@@ -11,12 +11,15 @@ namespace FinalProj.Data.Controllers
 {
     public class CustomerManagement
     {
-        public Customer CreateCustomer(int userID, string userName, int phoneNumber, string email, string address)
+		//Create Customer object
+
+		public Customer CreateCustomer(int userID, string userName, int phoneNumber, string email, string address)
         {
             Customer newCustomer = new Customer(userID, userName, phoneNumber, email, address);
             return newCustomer;
         } 
 
+		//Receive a Customer object and change it into a sql script and save to the DB
         public void SaveCustomerToDB(Customer customer)
         {
             if (customer == null)
@@ -29,7 +32,7 @@ namespace FinalProj.Data.Controllers
 				SqlConnection connection = new SqlConnection(connectionString);
 				connection.Open();
 
-				string populateDatabaseScript = "INSERT INTO FinalProj_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
+				string populateDatabaseScript = "INSERT INTO FP_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
 				SqlCommand command = new SqlCommand(populateDatabaseScript, connection);
 				SqlParameter parameter1 = new SqlParameter("@CustID", customer.UserId);
 				command.Parameters.Add(parameter1);
@@ -46,6 +49,6 @@ namespace FinalProj.Data.Controllers
 				reader.Close();
 				connection.Close();
 			}
-        } 
+        }       
     }
 }

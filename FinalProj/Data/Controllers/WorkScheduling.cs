@@ -24,7 +24,7 @@ namespace FinalProj.Data.Controllers
 			SqlDataReader reader = command.ExecuteReader();
 
 			List<WorkTicket> ticketList = new List<WorkTicket>();
-
+			//Create a ticket for each row return and add to the ticketList
 			while (reader.Read())
 			{
 				int workticketId = reader.GetInt32(0);
@@ -44,6 +44,9 @@ namespace FinalProj.Data.Controllers
 				ticketList.Add(ticket);
 			}
 
+			reader.Close();
+			connection.Close();
+
 			return ticketList;
 		}
 
@@ -60,6 +63,39 @@ namespace FinalProj.Data.Controllers
 			command.Parameters.Add(parameter1);
 			SqlParameter parameter2 = new SqlParameter("@TicketId", workTicket.TicketId);
 			command.Parameters.Add(parameter2);
+
+			command.ExecuteNonQuery();
+			connection.Close();
+		}
+
+		//Query To generate available Service in the database
+		public List<Service> GetAllService()
+		{
+			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
+			SqlConnection connection = new SqlConnection(connectionString);
+			connection.Open();
+
+			string query = "SELECT serviceid, servicename, price, timeinminute, description FROM FP_SERVICE;";
+			SqlCommand command = new SqlCommand(query, connection);
+			SqlDataReader reader = command.ExecuteReader();
+
+			List<Service> serviceList = new List<Service>();
+			while (reader.Read())
+			{
+				int serviceId = reader.GetInt32(0);
+				string serviceName = reader.GetString(1);
+				int price = reader.GetInt32(2);
+				int timeinminute = reader.GetInt32(3);
+				string desc = reader.GetString(4);
+
+				Service service = new Service(serviceId, serviceName, price, timeinminute, desc);
+				serviceList.Add(service);
+			}
+
+			reader.Close();
+			connection.Close();
+
+			return serviceList;
 		}
 	}
 }

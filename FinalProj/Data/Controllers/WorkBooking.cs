@@ -43,6 +43,9 @@ namespace FinalProj.Data.Controllers
 				command.Parameters.Add(parameter4);
 				SqlParameter parameter5 = new SqlParameter("@ServiceDate", ticket.ServiceDate);
 				command.Parameters.Add(parameter5);
+
+				command.ExecuteNonQuery();
+				connection.Close();
 			}
 		}
 

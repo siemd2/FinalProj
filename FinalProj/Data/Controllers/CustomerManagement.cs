@@ -45,8 +45,7 @@ namespace FinalProj.Data.Controllers
 				SqlParameter parameter5 = new SqlParameter("@CustAddress", customer.Address);
 				command.Parameters.Add(parameter5);
 
-				SqlDataReader reader = command.ExecuteReader();
-				reader.Close();
+				command.ExecuteNonQuery();
 				connection.Close();
 			}
         }       

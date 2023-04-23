@@ -19,6 +19,16 @@ namespace FinalProj.Data.Models
         public int AmountInstock { get => amountInstock; set => amountInstock = value; }
         public string Condition { get => condition; set => condition = value; }
 
+        public MiscellaneousItem(int partId, string partName, int instock, string condition) 
+        {
+            this.partId = partId;
+            this.partName = partName;
+            this.amountInstock = instock;
+            this.condition = condition;
+        }
 
-    }
+		public MiscellaneousItem()
+		{
+		}
+	}
 }

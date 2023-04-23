@@ -22,5 +22,17 @@ namespace FinalProj.Data.Models
         public string Condition { get => condition; set => condition = value; }
 		public string ArriveDate { get => arriveDate; set => arriveDate = value; }
 		public string MakeModelYear { get => makeModelYear; set => makeModelYear = value; }
+
+        public VehiclePart(int partId, string partName, int amountInstock, string condition, string arriveDate, string mmm)
+        {
+            this.partId = partId;
+            this.partName = partName;
+            this.amountInstock = amountInstock;
+            this.condition = condition;
+            this.arriveDate = arriveDate;
+            makeModelYear = mmm;
+        }
+
+        public VehiclePart() { }
 	}
 }

@@ -1,15 +1,42 @@
 ﻿@page "/inventorymanagement"
 
-<h3>Inventory Management</h3>
-
+<h2>Inventory Management</h2>
 <br />
+<br />
+<h3>Auto Parts Inventory:</h3>
+
 <select class="form-select" aria-label="Default select example">
-	<option selected>Choose Part:</option>
+	<option selected>Choose Auto Part:</option>
 	<option value="1">Part One</option>
 	<option value="2">Part Two</option>
 	<option value="3">Part Three</option>
 </select>
 <br />
+<br />
+
+<style>
+	hr {
+		border: none;
+		border-top: 3px solid black;
+		margin: 20px 0;
+	}
+</style>
+
+<hr>
+<br />
+<br />
+<h3>Misc Parts Inventory:</h3>
+
+<select class="form-select" aria-label="Default select example">
+	<option selected>Choose Misc Part:</option>
+	<option value="1">Part One</option>
+	<option value="2">Part Two</option>
+	<option value="3">Part Three</option>
+</select>
+<br />
+<br />
+
+
 
 @code {
 

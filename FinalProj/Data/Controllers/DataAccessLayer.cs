@@ -12,7 +12,7 @@ namespace FinalProj.DataAccess
 	{
 		private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
 
-		public List<Customer> GetAllCustomers()
+		public Task<List<Customer>> GetAllCustomers()
 		{
 			List<Customer> customers = new List<Customer>();
 
@@ -38,10 +38,10 @@ namespace FinalProj.DataAccess
 				}
 			}
 
-			return customers;
+			return Task.FromResult(customers);
 		}
 
-		public List<Staff> GetAllStaff()
+		public Task <List<Staff>> GetAllStaff()
 		{
 			List<Staff> staffList = new List<Staff>();
 
@@ -66,10 +66,10 @@ namespace FinalProj.DataAccess
 				}
 			}
 
-			return staffList;
+			return Task.FromResult(staffList);
 		}
 
-		public List<Service> GetAllServices()
+		public Task <List<Service>> GetAllServices()
 		{
 			List<Service> services = new List<Service>();
 
@@ -94,7 +94,7 @@ namespace FinalProj.DataAccess
 					}
 				}
 			}
-			return services;
+			return Task.FromResult(services);
 		}
 	}
 }

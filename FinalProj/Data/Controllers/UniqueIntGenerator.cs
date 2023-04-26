@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace FinalProj.Data.Controllers
 {
 	// to call method :
-	// int uniqueId = UniqueIntGenerator.GenerateUniqueInt();
-	// int uniqueId2 = UniqueIntGenerator.GenerateUniqueInt();
+	// int Id = UniqueIntGenerator.GenerateUniqueInt();
+	// int Id2 = UniqueIntGenerator.GenerateUniqueInt();
 	// etc
 
 	/*

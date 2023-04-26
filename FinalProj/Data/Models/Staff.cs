@@ -18,5 +18,20 @@ namespace FinalProj.Data.Models
         public string UserName { get => name; set => name = value; }
         public int PhoneNumber { get => phone; set => phone = value; }
         public string Email { get => email; set => email = value; }
+
+        // Default constructor
+        public Staff()
+        {
+
+        }
+
+        // Constructor with four arguments
+        public Staff(int id, string name, int phone, string email)
+        {
+            this.id = id;
+            this.name = name;
+            this.phone = phone;
+            this.email = email;
+        }
     }
 }

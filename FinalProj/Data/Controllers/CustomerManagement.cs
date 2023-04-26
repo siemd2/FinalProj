@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FinalProj.Data.Models;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 
 namespace FinalProj.Data.Controllers

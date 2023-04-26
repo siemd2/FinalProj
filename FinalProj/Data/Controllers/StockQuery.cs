@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +41,7 @@ namespace FinalProj.Data.Controllers
 
 		}
 
-		//Not Complete
+		// Return an obj of misc items
 		public MiscellaneousItem MiscPartQuery(MiscellaneousItem item)
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";

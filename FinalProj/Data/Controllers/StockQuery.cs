@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FinalProj.Data.Models;
+using Microsoft.Data.SqlClient;
+
 
 namespace FinalProj.Data.Controllers
 {
@@ -15,56 +16,61 @@ namespace FinalProj.Data.Controllers
 		public VehiclePart VehiclePartQuery(VehiclePart checkPart)
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
-			SqlConnection connection = new SqlConnection(connectionString);
-			connection.Open();
-
-			string query = "SELECT itemid, itemname, amountinstock, condition, arrivaldate, makemodelyear FROM FP_VEHICLEPART WHERE itemid = @checkpartid;";
-			SqlCommand command = new SqlCommand(query, connection);
-			SqlParameter parameter1 = new SqlParameter("@checkpartid", checkPart.PartId);
-			command.Parameters.Add(parameter1);
-			SqlDataReader reader = command.ExecuteReader();
-
 			VehiclePart part = new VehiclePart();
-			while (reader.Read())
+
+			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				part.PartId = reader.GetInt32(0);
-				part.PartName = reader.GetString(1);
-				part.AmountInstock = reader.GetInt32(2);
-				part.Condition = reader.GetString(3);
-				part.ArriveDate = reader.GetString(4);
-				part.MakeModelYear = reader.GetString(5);				
+				connection.Open();
+				string query = "SELECT ItemID, ITEMNAME, AMOUNTINSTOCK, CONDITION, ARRIVALDATE, MAKEMODELYEAR FROM FP_VehiclePart;";
+
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					SqlParameter parameter1 = new SqlParameter("@checkitemid", checkPart.PartId);
+					command.Parameters.Add(parameter1);
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							part.PartId = (int)reader.GetDecimal(0);
+							part.PartName = reader.GetString(1);
+							part.AmountInstock = (int)reader.GetDecimal(2);
+							part.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
+							part.ArriveDate = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
+							part.MakeModelYear = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
+						}
+					}
+				}
 			}
-			reader.Close();
-			connection.Close();
-
 			return part;
-
 		}
 
-		//Not Complete
+		//Query For one specific Misc Item by it ID
 		public MiscellaneousItem MiscPartQuery(MiscellaneousItem item)
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
-			SqlConnection connection = new SqlConnection(connectionString);
-			connection.Open();
-
-			string query = "SELECT itemid, itemName, amountinstock, condition FROM FP_MISCITEM WHERE itemid = @checkitemid;";
-			SqlCommand command = new SqlCommand(query, connection);
-			SqlParameter parameter1 = new SqlParameter("@checkitemid", item.PartId);
-			command.Parameters.Add(parameter1);
-			SqlDataReader reader = command.ExecuteReader();
-
 			MiscellaneousItem miscItem = new MiscellaneousItem();
-			while (reader.Read())
-			{
-				miscItem.PartId = reader.GetInt32(0);
-				miscItem.PartName = reader.GetString(1);
-				miscItem.AmountInstock = reader.GetInt32(2);
-				miscItem.Condition = reader.GetString(3);
-			}
-			reader.Close();
-			connection.Close();
 
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				string query = "SELECT itemid, itemName, amountinstock, condition FROM FP_MISCITEM WHERE itemid = @checkitemid;";
+
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					SqlParameter parameter1 = new SqlParameter("@checkitemid", item.PartId);
+					command.Parameters.Add(parameter1);
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							miscItem.PartId = (int)reader.GetDecimal(0);
+							miscItem.PartName = reader.GetString(1);
+							miscItem.AmountInstock = (int)reader.GetDecimal(2);
+							miscItem.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
+						}
+					}
+				}
+			}
 			return miscItem;
 		}
 
@@ -72,64 +78,61 @@ namespace FinalProj.Data.Controllers
 		public List<VehiclePart> QueryAllVehiclePart()
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
-			SqlConnection connection = new SqlConnection(connectionString);
-			connection.Open();
-
-			string query = "SELECT itemid, itemname, amountinstock, condition, arrivaldate, makemodelyear FROM FP_VEHICLEPART;";
-			SqlCommand command = new SqlCommand(query, connection);
-			SqlDataReader reader = command.ExecuteReader();
-
 			List<VehiclePart> vehiclePartList = new List<VehiclePart>();
-			//Create a ticket for each row return and add to the ticketList
-			while (reader.Read())
+
+			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				int itemId = reader.GetInt32(0);
-				string itemName = reader.GetString(1);
-				int amountinstock = reader.GetInt32(2);
-				string condition = reader.GetString(3);
-				string arrivalDate = reader.GetString(4);
-				string mmm = reader.GetString(5);
-				
-				VehiclePart ticket = new VehiclePart(itemId, itemName, amountinstock, condition, arrivalDate, mmm);
+				connection.Open();
+				string query = "SELECT ItemID, ITEMNAME, AMOUNTINSTOCK, CONDITION, ARRIVALDATE, MAKEMODELYEAR FROM FP_VehiclePart;";
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							VehiclePart part = new VehiclePart();
+							part.PartId = (int)reader.GetDecimal(0);
+							part.PartName = reader.GetString(1);
+							part.AmountInstock = (int)reader.GetDecimal(2);
+							part.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
+							part.ArriveDate = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
+							part.MakeModelYear = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
 
-				vehiclePartList.Add(ticket);
+							vehiclePartList.Add(part);
+						}
+					}
+				}
 			}
-
-			reader.Close();
-			connection.Close();
-
 			return vehiclePartList;
 		}
-
-		//Query for all available Miscitem
-		public List<MiscellaneousItem> QueryAllMiscIten()
+		//Query All Misc Item
+		public List<MiscellaneousItem> QueryAllMiscItem()
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
-			SqlConnection connection = new SqlConnection(connectionString);
-			connection.Open();
+			List<MiscellaneousItem> miscList = new List<MiscellaneousItem>();
 
-			string query = "SELECT itemid, itemName, amountinstock, condition FROM FP_MISCITEM;";
-			SqlCommand command = new SqlCommand(query, connection);
-			SqlDataReader reader = command.ExecuteReader();
-
-			List<MiscellaneousItem> miscItemList = new List<MiscellaneousItem>();
-			//Create a ticket for each row return and add to the ticketList
-			while (reader.Read())
+			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				int itemId = reader.GetInt32(0);
-				string itemName = reader.GetString(1);
-				int amountinstock = reader.GetInt32(2);
-				string condition = reader.GetString(3);
+				connection.Open();
+				string query = "SELECT ItemID, ITEMNAME, AMOUNTINSTOCK, CONDITION FROM FP_MiscItem;";
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							MiscellaneousItem miscItem = new MiscellaneousItem();
+							miscItem.PartId = (int)reader.GetDecimal(0);
+							miscItem.PartName = reader.GetString(1);
+							miscItem.AmountInstock = (int)reader.GetDecimal(2);
+							miscItem.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
 
-				MiscellaneousItem miscItem = new MiscellaneousItem(itemId, itemName, amountinstock, condition);
-
-				miscItemList.Add(miscItem);
+							miscList.Add(miscItem);
+						}
+					}
+				}
 			}
-
-			reader.Close();
-			connection.Close();
-
-			return miscItemList;
+			return miscList;
 		}
 	}
 }

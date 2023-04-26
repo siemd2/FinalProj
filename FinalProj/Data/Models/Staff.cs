@@ -7,16 +7,16 @@ using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
 {
-    public class Staff : IUser
-    {
-        private int id;
-        private string name;
-        private int phone;
-        private string email;
+	public class Staff : IUser
+	{
+		private int id;
+		private string name;
+		private int phone;
+		private string email;
 
-        public int UserId { get => id; set => id = value; }
-        public string UserName { get => name; set => name = value; }
-        public int PhoneNumber { get => phone; set => phone = value; }
-        public string Email { get => email; set => email = value; }
-    }
+		public int UserId { get => id; set => id = value; }
+		public string UserName { get => name; set => name = value; }
+		public int PhoneNumber { get => phone; set => phone = value; }
+		public string Email { get => email; set => email = value; }
+	}
 }

@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace FinalProj.Data.Models
 {
-    public class Vehicle
-    {
-        private int vin;
-        private string makeModelYear;
-        private string lastServiceDate;
+	public class Vehicle
+	{
+		private int vin;
+		private string makeModelYear;
+		private string lastServiceDate;
 
-        public int Vin { get => vin; set => vin = value; }
-        public string MakeModelYear { get => makeModelYear; set => makeModelYear = value; }
-        public string LastServiceDate { get => lastServiceDate; set => lastServiceDate = value; }
+		public int Vin { get => vin; set => vin = value; }
+		public string MakeModelYear { get => makeModelYear; set => makeModelYear = value; }
+		public string LastServiceDate { get => lastServiceDate; set => lastServiceDate = value; }
 
-        public Vehicle(int vin, string mMM) 
-        {
-            this.vin = vin;
-            this.makeModelYear = mMM;
-        }
-    }
+		public Vehicle(int vin, string mMM)
+		{
+			this.vin = vin;
+			this.makeModelYear = mMM;
+		}
+	}
 }

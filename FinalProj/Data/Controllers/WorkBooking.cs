@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FinalProj.Data.Models;
+using Microsoft.Data.SqlClient;
+
 
 namespace FinalProj.Data.Controllers
 {
 	public class WorkBooking
 	{
 		//Create a new work ticket by taking parameter from the front end
-		public WorkTicket CreateBookingProfile(int ticketId, int staffID, Service service, Vehicle vehicle, string date, Customer customer, string serviceDate)
+		public WorkTicket CreateBookingProfile(int ticketId, int staffID, Service service, string date, Customer customer, string serviceDate)
 		{
-			WorkTicket newTask = new WorkTicket(ticketId, vehicle, customer, staffID, service, serviceDate);
+			WorkTicket newTask = new WorkTicket(ticketId, customer, staffID, service, serviceDate);
 			return newTask;
 		}
 

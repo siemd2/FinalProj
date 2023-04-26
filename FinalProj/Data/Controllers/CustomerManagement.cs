@@ -5,29 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using FinalProj.Data.Models;
 using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 
 namespace FinalProj.Data.Controllers
 {
-    public class CustomerManagement
-    {
+	public class CustomerManagement
+	{
 		//Create Customer object
 
 		public Customer CreateCustomer(int userID, string userName, int phoneNumber, string email, string address)
-        {
-            Customer newCustomer = new Customer(userID, userName, phoneNumber, email, address);
-            return newCustomer;
-        } 
+		{
+			Customer newCustomer = new Customer(userID, userName, phoneNumber, email, address);
+			return newCustomer;
+		}
 
 		//Receive a Customer object and change it into a sql script and save to the DB
-        public void SaveCustomerToDB(Customer customer)
-        {
-            if (customer == null)
-            {
-                throw new ArgumentNullException();
-            }
-            else
-            {
+		public void SaveCustomerToDB(Customer customer)
+		{
+			if (customer == null)
+			{
+				throw new ArgumentNullException();
+			}
+			else
+			{
 				string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
 				SqlConnection connection = new SqlConnection(connectionString);
 				connection.Open();
@@ -48,6 +49,6 @@ namespace FinalProj.Data.Controllers
 				command.ExecuteNonQuery();
 				connection.Close();
 			}
-        }       
-    }
+		}
+	}
 }

@@ -3,7 +3,10 @@
 @using FinalProj.Data.Controllers
 
 
+
 <h3>Customer Management System</h3>
+
+
 
 <br />
 <div class="input-group">
@@ -38,26 +41,28 @@
 <br />
 <br />
 
+
+
 @code {
-    string CustomerId { get; set; }
-    string CustomerName { get; set; }
-    string CustomerPhone { get; set; }
-    string CustomerEmail { get; set; }
-    string CustomerAddress { get; set; }
+	string CustomerId { get; set; }
+	string CustomerName { get; set; }
+	string CustomerPhone { get; set; }
+	string CustomerEmail { get; set; }
+	string CustomerAddress { get; set; }
 
-    Customer customer = new Customer();
-    CustomerManagement customerManagement = new CustomerManagement();
+	Customer customer = new Customer();
+	CustManagement custManagement = new CustManagement();
 
-    public void AddCustomer()
-    {
-        int.TryParse(CustomerId, out int id);
-        int.TryParse(CustomerPhone, out int phone);
-        customer.UserId = id;
-        customer.UserName = CustomerName;
-        customer.PhoneNumber = phone;
-        customer.Email = CustomerEmail;
-        customer.Address = CustomerAddress;
+	public void AddCustomer()
+	{
+		int.TryParse(CustomerId, out int id);
+		int.TryParse(CustomerPhone, out int phone);
+		customer.UserId = id;
+		customer.UserName = CustomerName;
+		customer.PhoneNumber = phone;
+		customer.Email = CustomerEmail;
+		customer.Address = CustomerAddress;
 
-        customerManagement.SaveCustomerToDB(customer);
-    }
+		custManagement.SaveCustomerToDB(customer);
+	}
 }

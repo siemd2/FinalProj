@@ -1,6 +1,5 @@
 ﻿@page "/schedulingcustomer"
 @using FinalProj.Data.Models
-@using FinalProj.Data.Controllers
 @using FinalProj.Data
 @inject DataAccessLayer DAL
 
@@ -51,5 +50,11 @@
 	int? SelectedService { get; set; }
 
 	List<Customer> customers = new List<Customer>();
-	
+
+	DataAccessLayer dataAccessLayer = new DataAccessLayer();
+
+	protected override void OnInitialized()
+	{
+		customers = dataAccessLayer.GetAllCustomers();
+	}
 }

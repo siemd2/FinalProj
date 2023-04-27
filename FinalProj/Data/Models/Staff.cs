@@ -22,7 +22,7 @@ namespace FinalProj.Data.Models
         // Default constructor
         public Staff()
         {
-
+            
         }
 
         // Constructor with four arguments

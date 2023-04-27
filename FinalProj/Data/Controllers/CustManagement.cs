@@ -15,7 +15,8 @@ namespace FinalProj.Data.Controllers
 		public void SaveCustomerToDB(Customer customer)
 		{			
 				string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
-				SqlConnection connection = new SqlConnection(connectionString);
+
+                SqlConnection connection = new SqlConnection(connectionString);
 				connection.Open();
 
                 string populateDatabaseScript = "INSERT INTO FP_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
@@ -33,7 +34,7 @@ namespace FinalProj.Data.Controllers
 
 				command.ExecuteNonQuery();
 				connection.Close();
-			}
 		}
 	}
 }
+

@@ -2,45 +2,53 @@
 @using FinalProj.Data.Models
 @using FinalProj.Data.Controllers
 
-
-
 <h3>Customer Management System</h3>
-
-
-
 <br />
+<br />
+<!-- error message -->
+<p class="text-danger" hidden="@(!ShowErrorMessage)">Please select a customer, staff member, and service before attempting to book an appointment.</p>
+<br />
+
 <div class="input-group">
 	<span class="input-group-text">Customer ID:</span>
-	<input type="number" @bind="customer.UserId" class="form-control" />
+	<input type="number" @bind="CustomerId" class="form-control" />
+</div>
+<br />
+<div>
+	<button type="button" class="btn btn-outline-primary" @onclick="GenerateID">Generate ID</button>
+	<span class="generated-id-label">New Id: </span>
+	<span class="generated-id">@NewID</span>
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer Full Name:</span>
-	<input type="text" @bind="customer.UserName" class="form-control" />
+	<input type="text" @bind="CustomerName" class="form-control" />
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer Phone #:</span>
-	<input type="number" @bind="customer.PhoneNumber" class="form-control" />
+	<input type="number" @bind="CustomerPhone" class="form-control" />
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer E-mail:</span>
-	<input type="email" @bind="customer.Email" class="form-control" />
+	<input type="email" @bind="CustomerEmail" class="form-control" />
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer Address:</span>
-	<input type="text" @bind="customer.Address" class="form-control" />
+	<input type="text" @bind="CustomerAddress" class="form-control" />
 </div>
 <br />
 <br />
 <button type="button" class="btn btn-outline-success" @onclick="AddCustomer">Add Customer</button>
 <br />
 <br />
+<!-- confirmation message -->
+<p class="text-success" hidden="@(!ShowSuccessMessage)">Customer Added To DataBase.</p>
 <br />
 <br />
-
+<br />
 
 
 @code {
@@ -49,20 +57,41 @@
 	string CustomerPhone { get; set; }
 	string CustomerEmail { get; set; }
 	string CustomerAddress { get; set; }
+	string NewID { get; set; }
 
 	Customer customer = new Customer();
 	CustManagement custManagement = new CustManagement();
 
+	bool ShowSuccessMessage { get; set; }
+	bool ShowErrorMessage { get; set; }
+
 	public void AddCustomer()
 	{
-		int.TryParse(CustomerId, out int id);
-		int.TryParse(CustomerPhone, out int phone);
-		customer.UserId = id;
-		customer.UserName = CustomerName;
-		customer.PhoneNumber = phone;
-		customer.Email = CustomerEmail;
-		customer.Address = CustomerAddress;
+		if (CustomerId != null && CustomerName != null && CustomerPhone != null && CustomerEmail != null && CustomerAddress != null)
+		{
+			int.TryParse(CustomerId, out int id);
+			int.TryParse(CustomerPhone, out int phone);
+			customer.UserId = id;
+			customer.UserName = string.IsNullOrEmpty(CustomerName) ? string.Empty : CustomerName;
+			customer.PhoneNumber = phone;
+			customer.Email = string.IsNullOrEmpty(CustomerEmail) ? string.Empty : CustomerEmail;
+			customer.Address = string.IsNullOrEmpty(CustomerAddress) ? string.Empty : CustomerAddress;
 
-		custManagement.SaveCustomerToDB(customer);
+			custManagement.SaveCustomerToDB(customer);
+
+			ShowErrorMessage = false;
+			ShowSuccessMessage = true;
+		}
+		else
+		{
+			ShowErrorMessage = true;
+			ShowSuccessMessage = false;
+		}
+
+	}
+
+	public void GenerateID()
+	{
+		NewID = UniqueIntGenerator.GenerateUniqueInt().ToString();
 	}
 }

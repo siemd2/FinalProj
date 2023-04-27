@@ -7,7 +7,6 @@ using FinalProj.Data.Models;
 using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 
-
 namespace FinalProj.Data.Controllers
 {
 	public class CustManagement
@@ -19,22 +18,22 @@ namespace FinalProj.Data.Controllers
 				SqlConnection connection = new SqlConnection(connectionString);
 				connection.Open();
 
-				string populateDatabaseScript = "INSERT INTO FP_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
-				SqlCommand command = new SqlCommand(populateDatabaseScript, connection);
-				SqlParameter parameter1 = new SqlParameter("@CustID", customer.UserId);
-				command.Parameters.Add(parameter1);
-				SqlParameter parameter2 = new SqlParameter("@CustName", customer.UserName);
-				command.Parameters.Add(parameter2);
-				SqlParameter parameter3 = new SqlParameter("@CustPhone", customer.PhoneNumber);
-				command.Parameters.Add(parameter3);
-				SqlParameter parameter4 = new SqlParameter("@CustEmail", customer.Email);
-				command.Parameters.Add(parameter4);
-				SqlParameter parameter5 = new SqlParameter("@CustAddress", customer.Address);
-				command.Parameters.Add(parameter5);
+                string populateDatabaseScript = "INSERT INTO FP_Customer VALUES (@CustID, @Custname, @CustPhone, @CustEmail, @CustAddress);";
+                SqlCommand command = new SqlCommand(populateDatabaseScript, connection);
+                SqlParameter parameter1 = new SqlParameter("@CustID", customer.UserId);
+                command.Parameters.Add(parameter1);
+                SqlParameter parameter2 = new SqlParameter("@CustName", customer.UserName);
+                command.Parameters.Add(parameter2);
+                SqlParameter parameter3 = new SqlParameter("@CustPhone", customer.PhoneNumber);
+                command.Parameters.Add(parameter3);
+                SqlParameter parameter4 = new SqlParameter("@CustEmail", customer.Email);
+                command.Parameters.Add(parameter4);
+                SqlParameter parameter5 = new SqlParameter("@CustAddress", customer.Address);
+                command.Parameters.Add(parameter5);
 
 				command.ExecuteNonQuery();
 				connection.Close();
-			
+			}
 		}
 	}
 }

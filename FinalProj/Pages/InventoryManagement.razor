@@ -1,15 +1,20 @@
 ﻿@page "/inventorymanagement"
+@using FinalProj.Data.Models
+@using FinalProj.Data.Controllers
+@inject StockQuery stockQuery
 
 <h3>Inventory Management</h3>
 <br />
 <br />
 <h4>Auto Parts Inventory:</h4>
 
-<select class="form-select" aria-label="Default select example">
-	<option selected>Choose Auto Part:</option>
-	<option value="1">Part One</option>
-	<option value="2">Part Two</option>
-	<option value="3">Part Three</option>
+<select class="form-select" aria-label="Default select example" @onchange="LoadSelectedAutoPart">
+	<!-- disabled option to prevent errors-->
+	<option selected disabled value="">Choose Auto Part:</option>
+	@foreach (var part in autoParts)
+	{
+		<option value="@part.PartId">@part.PartName</option>
+	}
 </select>
 <br />
 <br />
@@ -27,17 +32,52 @@
 <br />
 <h4>Misc Parts Inventory:</h4>
 
-<select class="form-select" aria-label="Default select example">
-	<option selected>Choose Misc Part:</option>
-	<option value="1">Part One</option>
-	<option value="2">Part Two</option>
-	<option value="3">Part Three</option>
+<select class="form-select" aria-label="Default select example" @onchange="LoadSelectedMiscPart">
+	<!-- disabled option to prevent errors-->
+	<option selected disabled value="">Choose Misc Part:</option>
+	@foreach (var part in miscParts)
+	{
+		<option value="@part.PartId">@part.PartName</option>
+	}
 </select>
 <br />
 <br />
 
+@if (selectedAutoPart != null)
+{
+	<h5>Selected Auto Part:</h5>
+	<p>@selectedAutoPart.PartName - Amount in stock: @selectedAutoPart.AmountInstock</p>
+}
 
+@if (selectedMiscPart != null)
+{
+	<h5>Selected Misc Part:</h5>
+	<p>@selectedMiscPart.PartName - Amount in stock: @selectedMiscPart.AmountInstock</p>
+}
 
 @code {
+	int? selectedAutoPartId;
+	int? selectedMiscPartId;
+	VehiclePart selectedAutoPart;
+	MiscellaneousItem selectedMiscPart;
+	List<VehiclePart> autoParts = new List<VehiclePart>();
+	List<MiscellaneousItem> miscParts = new List<MiscellaneousItem>();
 
+	protected override void OnInitialized()
+	{
+		autoParts = stockQuery.QueryAllVehiclePart();
+		miscParts = stockQuery.QueryAllMiscItem();
+	}
+
+	private void LoadSelectedAutoPart(ChangeEventArgs e)
+	{
+		selectedAutoPartId = Convert.ToInt32(e.Value);
+		selectedAutoPart = autoParts.FirstOrDefault(p => p.PartId == selectedAutoPartId);
+	}
+
+	private void LoadSelectedMiscPart(ChangeEventArgs e)
+	{
+		selectedMiscPartId = Convert.ToInt32(e.Value);
+		selectedMiscPart = miscParts.FirstOrDefault(p => p.PartId == selectedMiscPartId);
+	}
 }

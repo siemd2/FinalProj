@@ -16,9 +16,11 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddMauiBlazorWebView();
+		builder.Services.AddScoped<DataAccessLayer>();
+
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
-#endif
+		#endif
 		
 		//builder.Services.AddSingleton<WeatherForecastService>();
 

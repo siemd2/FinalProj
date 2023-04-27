@@ -26,9 +26,10 @@ namespace FinalProj.Data.Models
         public double Price { get => price; set => price = value; }
 		public string Description { get => description; set => description = value; }
 
-		public Service(int serviceId)
+		public Service(int serviceId, string name)
         {
             Id = serviceId;
+            Name = name;
         }
 
         public Service(int id, string name, double price, int time, string desc)

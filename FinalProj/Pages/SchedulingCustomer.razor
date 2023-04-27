@@ -17,6 +17,7 @@
 
 
 <select @bind="CustomerId" class="form-select" aria-label="Default select example">
+	<!-- disabled option to prevent errors-->
 	<option selected disabled value="">Choose Customer ID:</option>
 	@foreach (var customer in customers)
 	{
@@ -25,6 +26,7 @@
 </select>
 <br />
 <select @bind="StaffId" class="form-select" aria-label="Default select example">
+	<!-- disabled option to prevent errors-->
 	<option selected disabled value="">Choose Staff ID:</option>
 	@foreach (var staff in staffMembers)
 	{
@@ -33,6 +35,7 @@
 </select>
 <br />
 <select @bind="SelectedService" class="form-select" aria-label="Default select example">
+	<!-- disabled option to prevent errors-->
 	<option selected disabled value="">Choose Service:</option>
 	@foreach (var service in services)
 	{

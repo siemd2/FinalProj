@@ -1,9 +1,7 @@
 ﻿@page "/schedulingcustomer"
 @using FinalProj.Data.Controllers
 @using FinalProj.Data.Models
-@using FinalProj.DataAccess;
-@inject DataAccessLayer DbService
-
+@inject Data.DataAccessLayer DAL
 
 <h3>Appointment Booking System</h3>
 <br />
@@ -41,10 +39,8 @@
 	<input type="text" aria-label="First name" class="form-control">
 </div>
 <br />
-<button type="button" class="btn btn-outline-success" >Book Appointment</button>
+<button type="button" class="btn btn-outline-success">Book Appointment</button>
 <br />
-
-
 
 @code {
 	// set initial value to  null using ?
@@ -52,13 +48,10 @@
 	int? StaffId { get; set; }
 	int? SelectedService { get; set; }
 
-	DataAccessLayer DAL = new DataAccessLayer();
-
 	List<Customer> customers = new List<Customer>();
 
 	protected override async Task OnInitializedAsync()
 	{
-		customers = await DbService.GetAllCustomers();
+		customers = await DAL.GetAllCustomers();
 	}
-
 }

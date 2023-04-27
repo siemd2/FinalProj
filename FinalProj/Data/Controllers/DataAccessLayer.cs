@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using FinalProj.Data.Models;
 
-namespace FinalProj.DataAccess
+namespace FinalProj.Data
 {
 	public class DataAccessLayer
 	{

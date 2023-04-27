@@ -1,21 +1,29 @@
 ﻿@page "/schedulingcustomer"
+@using FinalProj.Data.Controllers
+@using FinalProj.Data.Models
+@inject Data.DataAccessLayer DAL
 
-<h3>Customer Booking System</h3>
+<h3>Appointment Booking System</h3>
 <br />
 <br />
 
-<div class="input-group">
-	<span class="input-group-text">Customer ID:</span>
-	<input type="text" aria-label="First name" class="form-control">
-</div>
+<select @bind="CustomerId" class="form-select" aria-label="Default select example">
+	<option selected disabled value="">Choose Customer ID:</option>
+	@foreach (var customer in customers)
+	{
+		<option value="@customer.UserId">@customer.UserId - @customer.UserName</option>
+	}
+</select>
 <br />
-<div class="input-group">
-	<span class="input-group-text">Staff ID:</span>
-	<input type="text" aria-label="First name" class="form-control">
-</div>
+<select @bind="StaffId" class="form-select" aria-label="Default select example">
+	<option selected disabled value="">Choose Your Staff ID:</option>
+	<option value="1">Service One</option>
+	<option value="2">Service Two</option>
+	<option value="3">Service Three</option>
+</select>
 <br />
-<select class="form-select" aria-label="Default select example">
-	<option selected>Choose Required Service:</option>
+<select @bind="SelectedService" class="form-select" aria-label="Default select example">
+	<option selected disabled value="">Choose Required Service:</option>
 	<option value="1">Service One</option>
 	<option value="2">Service Two</option>
 	<option value="3">Service Three</option>
@@ -35,5 +43,15 @@
 <br />
 
 @code {
+	// set initial value to  null using ?
+	int? CustomerId { get; set; }
+	int? StaffId { get; set; }
+	int? SelectedService { get; set; }
 
+	List<Customer> customers = new List<Customer>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		customers = await DAL.GetAllCustomers();
+	}
 }

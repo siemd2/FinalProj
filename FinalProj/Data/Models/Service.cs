@@ -14,7 +14,7 @@ namespace FinalProj.Data.Models
         private MiscellaneousItem miscellaneousItem;
         //private VehiclePart vehiclePart;
         private int timeRequire;
-        private double price;
+        private decimal price;
         private string description;
 
         public int Id { get => id; set => id = value; }
@@ -23,7 +23,7 @@ namespace FinalProj.Data.Models
         public MiscellaneousItem MiscellaneousItem { get => miscellaneousItem; set => miscellaneousItem = value; }
         //public VehiclePart VehiclePart { get => vehiclePart; set => vehiclePart = value; }
         public int TimeRequire { get => timeRequire; set => timeRequire = value; }
-        public double Price { get => price; set => price = value; }
+        public decimal Price { get => price; set => price = value; }
 		public string Description { get => description; set => description = value; }
 
 		public Service(int serviceId, string name)
@@ -32,7 +32,7 @@ namespace FinalProj.Data.Models
             Name = name;
         }
 
-        public Service(int id, string name, double price, int time, string desc)
+        public Service(int id, string name, decimal price, int time, string desc)
         {
             Id = id;
             Name = name;

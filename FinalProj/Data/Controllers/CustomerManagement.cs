@@ -12,14 +12,6 @@ namespace FinalProj.Data.Controllers
 {
 	public class CustomerManagement
 	{
-		//Create Customer object
-
-		public Customer CreateCustomer(int userID, string userName, int phoneNumber, string email, string address)
-		{
-			Customer newCustomer = new Customer(userID, userName, phoneNumber, email, address);
-			return newCustomer;
-		}
-
 		//Receive a Customer object and change it into a sql script and save to the DB
 		public void SaveCustomerToDB(Customer customer)
 		{

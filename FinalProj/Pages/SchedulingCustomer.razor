@@ -1,7 +1,9 @@
 ﻿@page "/schedulingcustomer"
 @using FinalProj.Data.Models
 @using FinalProj.Data
+@using FinalProj.Data.Controllers
 @inject DataAccessLayer DAL
+@inject WorkBooking wb
 
 
 <h3>Appointment Booking System</h3>
@@ -61,4 +63,6 @@
 		staffMembers = dataAccessLayer.GetAllStaff();
 		services = dataAccessLayer.lServices();
 	}
+
+    
 }

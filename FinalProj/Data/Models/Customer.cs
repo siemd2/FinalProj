@@ -37,5 +37,6 @@ namespace FinalProj.Data.Models
 			phone = phoneNumber;
 			this.email = email;
 		}
+		public Customer() { }
 	}
 }

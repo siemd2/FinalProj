@@ -20,7 +20,7 @@ public static class MauiProgram
 
 		builder.Services.AddMauiBlazorWebView();
 		builder.Services.AddScoped<DataAccessLayer>();
-		builder.Services.AddScoped<CustomerManagement>();
+		builder.Services.AddScoped<CustManagement>();
 		builder.Services.AddScoped<StockQuery>();
 		builder.Services.AddSingleton<WorkBooking>();
 		builder.Services.AddScoped<WorkScheduling>();

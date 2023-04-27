@@ -25,7 +25,7 @@ namespace FinalProj.Data.Controllers
 		public static HashSet<int> UniqueIntegers = new HashSet<int>();
 		private const int MinValue = 10000;
 		private const int MaxValue = 100000;
-		public static string FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Resources\\Assets\\UniqueIDs.txt");
+		public static string FilePath = @"C:\Users\siem3\OneDrive\Desktop\FinalProj\FinalProj\Resources\Assets\UniqueIDs.txt";
 
 		// populate the HashSet with any previously generated id's from txt storage
 		static UniqueIntGenerator()

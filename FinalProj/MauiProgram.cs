@@ -19,14 +19,13 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddMauiBlazorWebView();
-		builder.Services.AddSingleton<DataAccessLayer>();
-
-		builder.Services.AddSingleton<CustomerManagement>();
-
-		builder.Services.AddSingleton<StockQuery>();
+		builder.Services.AddScoped<DataAccessLayer>();
+		builder.Services.AddScoped<CustomerManagement>();
+		builder.Services.AddScoped<StockQuery>();
 		builder.Services.AddSingleton<WorkBooking>();
-		builder.Services.AddSingleton<WorkScheduling>();
+		builder.Services.AddScoped<WorkScheduling>();
 		builder.Services.AddSingleton<UniqueIntGenerator>();
+
 
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();

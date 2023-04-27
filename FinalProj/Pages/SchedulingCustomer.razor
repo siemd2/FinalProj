@@ -1,14 +1,20 @@
 ﻿@page "/schedulingcustomer"
 @using FinalProj.Data.Models
+@using FinalProj.Data.Controllers
 @using FinalProj.Data
 @using FinalProj.Data.Controllers
 @inject DataAccessLayer DAL
 @inject WorkBooking wb
 
 
+
 <h3>Appointment Booking System</h3>
 <br />
 <br />
+
+<!-- error message -->
+<p class="text-danger" hidden="@(!ShowErrorMessage)">Please select a customer, staff member, and service before attempting to book an appointment.</p> 
+
 
 <select @bind="CustomerId" class="form-select" aria-label="Default select example">
 	<option selected disabled value="">Choose Customer ID:</option>
@@ -19,6 +25,7 @@
 </select>
 <br />
 <select @bind="StaffId" class="form-select" aria-label="Default select example">
+	<option selected disabled value="">Choose Staff ID:</option>
 	@foreach (var staff in staffMembers)
 	{
 		<option value="@staff.UserId">@staff.UserId - @staff.UserName</option>
@@ -26,6 +33,7 @@
 </select>
 <br />
 <select @bind="SelectedService" class="form-select" aria-label="Default select example">
+	<option selected disabled value="">Choose Service:</option>
 	@foreach (var service in services)
 	{
 		<option value="@service.Id">@service.Id - @service.Name</option>
@@ -42,7 +50,11 @@
 	<input type="text" aria-label="First name" class="form-control">
 </div>
 <br />
-<button type="button" class="btn btn-outline-success">Book Appointment</button>
+<button type="button" class="btn btn-outline-success" @onclick="BookAppointment">Book Appointment</button>
+<br />
+<br />
+<!-- confirmation message -->
+<p class="text-success" hidden="@(!ShowSuccessMessage)">Task Added To DataBase.</p>
 <br />
 
 @code {
@@ -64,5 +76,42 @@
 		services = dataAccessLayer.lServices();
 	}
 
-    
+	bool ShowErrorMessage { get; set; }
+	bool ShowSuccessMessage { get; set; }
+
+	public void BookAppointment()
+	{
+		// 	Retrieve customer, staff and service objects from the lists
+		Customer selectedCustomer = customers.FirstOrDefault(c => c.UserId == CustomerId);
+		Staff selectedStaff = staffMembers.FirstOrDefault(s => s.UserId == StaffId);
+		Service selectedService = services.FirstOrDefault(s => s.Id == SelectedService);
+
+		// exception handling to make user enter all required values before booking apt
+		if (CustomerId != null && StaffId != null && SelectedService != null)
+		{
+			// create a work ticket
+			WorkBooking workBooking = new WorkBooking();
+			int ticketId = UniqueIntGenerator.GenerateUniqueInt();
+			string serviceDate = "";
+			WorkTicket newTicket = workBooking.CreateBookingProfile(ticketId, selectedStaff.UserId, selectedService, selectedCustomer, serviceDate);
+
+			// pass new ticker obj to db query method
+			workBooking.SaveTicketToDatabase(newTicket);
+
+			// set error msg bool to false
+			ShowErrorMessage = false;
+
+			// set success msg bool to true
+			ShowSuccessMessage = true;
+
+		}
+		else
+		{
+			// display error message
+			ShowErrorMessage = true;
+
+			// success msg fasle
+			ShowSuccessMessage = false;
+		}
+	}
 }

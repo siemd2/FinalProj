@@ -31,7 +31,7 @@ namespace FinalProj.Data.Controllers
 						while (reader.Read())
 						{
 							int workticketId = (int)reader.GetDecimal(0);
-							int staffId = (int)reader.GetDecimal(1);
+							int staffId = reader.IsDBNull(1) ? 0 : (int)reader.GetDecimal(1);
 							int customerId = (int)reader.GetDecimal(2);
 							int serviceId = (int)reader.GetDecimal(3);
 							string serviceDate = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);

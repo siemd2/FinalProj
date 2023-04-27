@@ -1,22 +1,32 @@
 ﻿@page "/technicianworkschedule"
+@using FinalProj.Data.Models
+@using FinalProj.Data.Controllers
+@using FinalProj.Data
+@inject DataAccessLayer DAL
+@inject WorkBooking wb
 
 <h3>Techinician Task Management System</h3>
 <br />
 <br />
 <h4>To Do Tasks:</h4>
-<select class="form-select" aria-label="Default select example">
-  <option selected>Choose Task</option>
-  <option value="1">Task One</option>
-  <option value="2">Task Two</option>
-  <option value="3">Task Three</option>
+<select class="form-select" @bind="SelectedTaskId" aria-label="Default select example">
+	<option selected disabled value="">Choose Task</option>
+	@foreach (var task in tasksToDo)
+	{
+		<option value="@task.TicketId">@task.Service.Name</option>
+	}
 </select>
 <br />
-<div class="input-group">
-	<span class="input-group-text">Staff ID:</span>
-	<input type="text" aria-label="First name" class="form-control">
-</div>
+<select @bind="StaffId" class="form-select" aria-label="Default select example">
+	<!-- disabled option to prevent errors-->
+	<option selected disabled value="">Choose Staff ID:</option>
+	@foreach (var staff in staffMembers)
+	{
+		<option value="@staff.UserId">@staff.UserId - @staff.UserName</option>
+	}
+</select>
 <br />
-<button type="button" class="btn btn-outline-primary">Book Task</button>
+<button type="button" class="btn btn-outline-primary" @onclick="BookTask">Book Task</button>
 <br />
 <br />
 <br />
@@ -34,23 +44,68 @@
 
 
 <h4>In Progress Tasks:</h4>
-<select class="form-select" aria-label="Default select example">
-  <option selected>Choose Task</option>
-  <option value="1">Task One</option>
-  <option value="2">Task Two</option>
-  <option value="3">Task Three</option>
+<select class="form-select" @bind="SelectedInProgressTask" aria-label="Default select example">
+		<option selected disabled value="">Choose Task</option>
+		@foreach (var task in tasksInProgress)
+		{
+			<option value="@task.TicketId">@task.Service.Name</option>
+		}
 </select>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Staff ID:</span>
-	<input type="text" aria-label="First name" class="form-control">
+	<input type="text" value="@StaffId" class="form-control" readonly />
 </div>
 <br />
-<button type="button" class="btn btn-outline-success">Task Complete</button>
+<button type="button" class="btn btn-outline-success" @onclick="CompleteTask">Task Complete</button>
 <br />
 <br />
 <br />
 <br />
-@code {
 
+@code {
+	int? StaffId { get; set; }
+	int? SelectedTaskId { get; set; }
+	int? SelectedInProgressTask { get; set; }
+
+	List<Staff> staffMembers = new List<Staff>();
+	List<WorkTicket> tasksToDo = new List<WorkTicket>();
+	List<WorkTicket> tasksInProgress = new List<WorkTicket>();
+
+	DataAccessLayer dataAccessLayer = new DataAccessLayer();
+	WorkScheduling ws = new WorkScheduling();
+
+	protected override void OnInitialized()
+	{
+		staffMembers = dataAccessLayer.GetAllStaff();
+		tasksToDo = ws.QueryAllWorkTicket();
+	}
+
+	public void BookTask()
+	{
+		if (SelectedTaskId.HasValue && StaffId.HasValue)
+		{
+			WorkTicket selectedTask = tasksToDo.FirstOrDefault(t => t.TicketId == SelectedTaskId.Value);
+			if (selectedTask != null)
+			{
+				tasksToDo.Remove(selectedTask);
+				tasksInProgress.Add(selectedTask);
+				StateHasChanged(); // trigger re-rerender
+			}
+		}
+	}
+
+	public void CompleteTask()
+	{
+		if (SelectedInProgressTask.HasValue)
+		{
+			WorkTicket selectedTask = tasksInProgress.FirstOrDefault(t => t.TicketId == SelectedTaskId.Value);
+			if (selectedTask != null)
+			{
+				tasksInProgress.Remove(selectedTask);
+				StaffId = null;
+				StateHasChanged(); // trigger re-rerender
+			}
+		}
+	}
 }

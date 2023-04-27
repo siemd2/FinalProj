@@ -18,6 +18,11 @@
 </select>
 <br />
 <br />
+@if (selectedAutoPart != null)
+{
+	<h5>Selected Auto Part:</h5>
+	<p>@selectedAutoPart.PartName - Amount in stock: @selectedAutoPart.AmountInstock</p>
+}
 
 <style>
 	hr {
@@ -42,12 +47,6 @@
 </select>
 <br />
 <br />
-
-@if (selectedAutoPart != null)
-{
-	<h5>Selected Auto Part:</h5>
-	<p>@selectedAutoPart.PartName - Amount in stock: @selectedAutoPart.AmountInstock</p>
-}
 
 @if (selectedMiscPart != null)
 {

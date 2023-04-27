@@ -12,7 +12,7 @@ namespace FinalProj.Data
 	{
 		private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
 
-		public Task<List<Customer>> GetAllCustomers()
+		public List<Customer> GetAllCustomers()
 		{
 			List<Customer> customers = new List<Customer>();
 
@@ -26,11 +26,11 @@ namespace FinalProj.Data
 					{
 						while (reader.Read())
 						{
-							int customerId = reader.GetInt32(0);
+							int customerId = (int)reader.GetDecimal(0);
 							string customerName = reader.GetString(1);
-							int phoneNumber = reader.GetInt32(2);
-							string email = reader.GetString(3);
-							string address = reader.GetString(4);
+							int phoneNumber = (int)reader.GetDecimal(2);
+							string email = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
+							string address = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
 
 							customers.Add(new Customer(customerId, customerName, phoneNumber, email, address));
 						}
@@ -38,10 +38,10 @@ namespace FinalProj.Data
 				}
 			}
 
-			return Task.FromResult(customers);
+			return customers;
 		}
 
-		public Task <List<Staff>> GetAllStaff()
+		public List<Staff> GetAllStaff()
 		{
 			List<Staff> staffList = new List<Staff>();
 
@@ -55,10 +55,10 @@ namespace FinalProj.Data
 					{
 						while (reader.Read())
 						{
-							int staffId = reader.GetInt32(0);
+							int staffId = (int)reader.GetDecimal(0);
 							string staffName = reader.GetString(1);
-							int phoneNumber = reader.GetInt32(2);
-							string email = reader.GetString(3);
+							int phoneNumber = (int)reader.GetDecimal(2);
+							string email = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
 
 							staffList.Add(new Staff(staffId, staffName, phoneNumber, email));
 						}
@@ -66,10 +66,10 @@ namespace FinalProj.Data
 				}
 			}
 
-			return Task.FromResult(staffList);
+			return staffList;
 		}
 
-		public Task <List<Service>> GetAllServices()
+		public List<Service> lServices()
 		{
 			List<Service> services = new List<Service>();
 
@@ -83,18 +83,18 @@ namespace FinalProj.Data
 					{
 						while (reader.Read())
 						{
-							int serviceId = reader.GetInt32(0);
+							int serviceId = (int)reader.GetDecimal(0);
 							string serviceName = reader.GetString(1);
-							decimal price = reader.GetDecimal(2);
-							int timeInMinute = reader.GetInt32(3);
-							string description = reader.GetString(4);
+							double price = reader.GetDouble(2);
+							int timeInMinute = (int)reader.GetDecimal(3);
+							string description = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
 
 							services.Add(new Service(serviceId, serviceName, price, timeInMinute, description));
 						}
 					}
 				}
 			}
-			return Task.FromResult(services);
+			return services;
 		}
 	}
 }

@@ -1,7 +1,9 @@
 ﻿@page "/schedulingcustomer"
-@using FinalProj.Data.Controllers
 @using FinalProj.Data.Models
-@inject Data.DataAccessLayer DAL
+@using FinalProj.Data.Controllers
+@using FinalProj.Data
+@inject DataAccessLayer DAL
+
 
 <h3>Appointment Booking System</h3>
 <br />
@@ -49,9 +51,5 @@
 	int? SelectedService { get; set; }
 
 	List<Customer> customers = new List<Customer>();
-
-	protected override async Task OnInitializedAsync()
-	{
-		customers = await DAL.GetAllCustomers();
-	}
+	
 }

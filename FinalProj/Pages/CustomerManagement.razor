@@ -1,43 +1,63 @@
 ﻿@page "/customermanagement"
 @using FinalProj.Data.Models
 @using FinalProj.Data.Controllers
-@using FinalProj.Data
+
 
 <h3>Customer Management System</h3>
 
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer ID:</span>
-	<input type="text" aria-label="First name" class="form-control">
+	<input type="number" @bind="customer.UserId" class="form-control" />
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer Full Name:</span>
-	<input type="text" aria-label="First name" class="form-control">
+	<input type="text" @bind="customer.UserName" class="form-control" />
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer Phone #:</span>
-	<input type="text" aria-label="First name" class="form-control">
+	<input type="number" @bind="customer.PhoneNumber" class="form-control" />
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer E-mail:</span>
-	<input type="text" aria-label="First name" class="form-control">
+	<input type="email" @bind="customer.Email" class="form-control" />
 </div>
 <br />
 <div class="input-group">
 	<span class="input-group-text">Customer Address:</span>
-	<input type="text" aria-label="First name" class="form-control">
+	<input type="text" @bind="customer.Address" class="form-control" />
 </div>
 <br />
 <br />
-<button type="button" class="btn btn-outline-success">Add Customer</button>
+<button type="button" class="btn btn-outline-success" @onclick="AddCustomer">Add Customer</button>
 <br />
 <br />
 <br />
 <br />
 
 @code {
+    string CustomerId { get; set; }
+    string CustomerName { get; set; }
+    string CustomerPhone { get; set; }
+    string CustomerEmail { get; set; }
+    string CustomerAddress { get; set; }
 
+    Customer customer = new Customer();
+    CustomerManagement customerManagement = new CustomerManagement();
+
+    public void AddCustomer()
+    {
+        int.TryParse(CustomerId, out int id);
+        int.TryParse(CustomerPhone, out int phone);
+        customer.UserId = id;
+        customer.UserName = CustomerName;
+        customer.PhoneNumber = phone;
+        customer.Email = CustomerEmail;
+        customer.Address = CustomerAddress;
+
+        customerManagement.SaveCustomerToDB(customer);
+    }
 }

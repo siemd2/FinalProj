@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
 using FinalProj.Data;
+using FinalProj.Data.Controllers;
 
 namespace FinalProj;
 
@@ -18,6 +19,11 @@ public static class MauiProgram
 
 		builder.Services.AddMauiBlazorWebView();
 		builder.Services.AddScoped<DataAccessLayer>();
+		builder.Services.AddScoped<CustomerManagement>();
+		builder.Services.AddScoped<StockQuery>();
+		builder.Services.AddScoped<WorkBooking>();
+		builder.Services.AddScoped<WorkScheduling>();
+		builder.Services.AddScoped<UniqueIntGenerator>();
 
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();

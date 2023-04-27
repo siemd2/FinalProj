@@ -21,9 +21,10 @@ public static class MauiProgram
 		builder.Services.AddScoped<DataAccessLayer>();
 		builder.Services.AddScoped<CustomerManagement>();
 		builder.Services.AddScoped<StockQuery>();
-		builder.Services.AddScoped<WorkBooking>();
+		builder.Services.AddSingleton<WorkBooking>();
 		builder.Services.AddScoped<WorkScheduling>();
-		builder.Services.AddScoped<UniqueIntGenerator>();
+		builder.Services.AddSingleton<UniqueIntGenerator>();
+
 
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();

@@ -85,7 +85,7 @@ namespace FinalProj.Data
 						{
 							int serviceId = (int)reader.GetDecimal(0);
 							string serviceName = reader.GetString(1);
-							double price = reader.IsDBNull(2) ? 0 : reader.GetDouble(2);
+							decimal price = reader.IsDBNull(2) ? 0 : reader.GetDecimal(2);
 							int timeInMinute = reader.IsDBNull(3) ? 0 : (int)reader.GetDecimal(3);
 							string description = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
 

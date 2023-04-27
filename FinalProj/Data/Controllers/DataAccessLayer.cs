@@ -28,7 +28,7 @@ namespace FinalProj.Data
 						{
 							int customerId = (int)reader.GetDecimal(0);
 							string customerName = reader.GetString(1);
-							int phoneNumber = (int)reader.GetDecimal(2);
+							int phoneNumber = reader.IsDBNull(2) ? 0 : (int)reader.GetDecimal(2);
 							string email = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
 							string address = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
 
@@ -57,7 +57,7 @@ namespace FinalProj.Data
 						{
 							int staffId = (int)reader.GetDecimal(0);
 							string staffName = reader.GetString(1);
-							int phoneNumber = (int)reader.GetDecimal(2);
+							int phoneNumber = reader.IsDBNull(2) ? 0 : (int)reader.GetDecimal(2);
 							string email = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
 
 							staffList.Add(new Staff(staffId, staffName, phoneNumber, email));
@@ -85,9 +85,9 @@ namespace FinalProj.Data
 						{
 							int serviceId = (int)reader.GetDecimal(0);
 							string serviceName = reader.GetString(1);
-							double price = reader.GetDouble(2);
-							int timeInMinute = (int)reader.GetDecimal(3);
-							string description = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
+							double price = reader.IsDBNull(2) ? 0 : reader.GetDouble(2);
+							int timeInMinute = reader.IsDBNull(3) ? 0 : (int)reader.GetDecimal(3);
+							string description = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
 
 							services.Add(new Service(serviceId, serviceName, price, timeInMinute, description));
 						}

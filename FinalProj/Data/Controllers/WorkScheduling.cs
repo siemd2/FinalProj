@@ -36,7 +36,7 @@ namespace FinalProj.Data.Controllers
 							int serviceId = (int)reader.GetDecimal(3);
 							string serviceDate = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
 							string customerName = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
-							int custPhone = (int)reader.GetDecimal(6);
+							int custPhone = reader.IsDBNull(6) ? 0 : (int)reader.GetDecimal(6);
 							string custEmail = reader.IsDBNull(7) ? string.Empty : reader.GetString(7);
 							string custAddress = reader.IsDBNull(8) ? string.Empty : reader.GetString(8);
 							string serviceName = reader.IsDBNull(9) ? string.Empty : reader.GetString(9);
@@ -87,8 +87,8 @@ namespace FinalProj.Data.Controllers
 						{
 							int serviceId = (int)reader.GetDecimal(0);
 							string serviceName = reader.IsDBNull(1) ? string.Empty : reader.GetString(1);
-							int price = (int)reader.GetDecimal(2);
-							int timeinminute = (int)reader.GetDecimal(3);
+							int price = reader.IsDBNull(2) ? 0 : (int)reader.GetDecimal(2);
+							int timeinminute = reader.IsDBNull(3) ? 0 : (int)reader.GetDecimal(3);
 							string desc = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
 
 							Service service = new Service(serviceId, serviceName, price, timeinminute, desc);

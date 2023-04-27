@@ -23,7 +23,80 @@ namespace FinalProj.Data.Controllers
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
-				string query = "SELECT wt.workticketid, wt.staffid, wt.customerid, wt.serviceid, wt.servicedate, c.customername, c.phonenumber, c.email, c.address, s.servicename FROM FP_WORKTICKET WT JOIN FP_CUSTOMER C ON WT.CUSTOMERID = C.CUSTOMERID JOIN FP_Service s ON WT.ServiceID = s.ServiceID;";
+				string query = "SELECT wt.workticketid, wt.staffid, wt.customerid, wt.serviceid, wt.servicedate, c.customername, c.phonenumber, c.email, c.address, s.servicename FROM FP_WORKTICKET WT JOIN FP_CUSTOMER C ON WT.CUSTOMERID = C.CUSTOMERID JOIN FP_Service s ON WT.ServiceID = s.ServiceID WHERE wt.staffID = null;";
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							int workticketId = (int)reader.GetDecimal(0);
+							int staffId = (int)reader.GetDecimal(1);
+							int customerId = (int)reader.GetDecimal(2);
+							int serviceId = (int)reader.GetDecimal(3);
+							string serviceDate = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
+							string customerName = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
+							int custPhone = reader.IsDBNull(6) ? 0 : (int)reader.GetDecimal(6);
+							string custEmail = reader.IsDBNull(7) ? string.Empty : reader.GetString(7);
+							string custAddress = reader.IsDBNull(8) ? string.Empty : reader.GetString(8);
+							string serviceName = reader.IsDBNull(9) ? string.Empty : reader.GetString(9);
+
+							WorkTicket ticket = new WorkTicket(workticketId, staffId, customerId, serviceId, serviceDate, customerName, custPhone, custEmail, custAddress, serviceName);
+							ticketList.Add(ticket);
+
+						}
+					}
+				}
+			}
+			return ticketList;
+		}
+		//Query For worktickets in the DB where the staffID is empty
+		public List<WorkTicket> QueryNoStaffWT()
+		{
+			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
+			List<WorkTicket> ticketList = new List<WorkTicket>();
+
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				string query = "SELECT wt.workticketid, wt.staffid, wt.customerid, wt.serviceid, wt.servicedate, c.customername, c.phonenumber, c.email, c.address, s.servicename FROM FP_WORKTICKET WT JOIN FP_CUSTOMER C ON WT.CUSTOMERID = C.CUSTOMERID JOIN FP_Service s ON WT.ServiceID = s.ServiceID WHERE WT.staffID IS null;";
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							int workticketId = (int)reader.GetDecimal(0);
+							int staffId = (int)reader.GetDecimal(1);
+							int customerId = (int)reader.GetDecimal(2);
+							int serviceId = (int)reader.GetDecimal(3);
+							string serviceDate = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
+							string customerName = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
+							int custPhone = reader.IsDBNull(6) ? 0 : (int)reader.GetDecimal(6);
+							string custEmail = reader.IsDBNull(7) ? string.Empty : reader.GetString(7);
+							string custAddress = reader.IsDBNull(8) ? string.Empty : reader.GetString(8);
+							string serviceName = reader.IsDBNull(9) ? string.Empty : reader.GetString(9);
+
+							WorkTicket ticket = new WorkTicket(workticketId, staffId, customerId, serviceId, serviceDate, customerName, custPhone, custEmail, custAddress, serviceName);
+							ticketList.Add(ticket);
+
+						}
+					}
+				}
+			}
+			return ticketList;
+		}
+
+		//Query for WT where staffID is not null
+		public List<WorkTicket> QueryRecievedWT()
+		{
+			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
+			List<WorkTicket> ticketList = new List<WorkTicket>();
+
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			{
+				connection.Open();
+				string query = "SELECT wt.workticketid, wt.staffid, wt.customerid, wt.serviceid, wt.servicedate, c.customername, c.phonenumber, c.email, c.address, s.servicename FROM FP_WORKTICKET WT JOIN FP_CUSTOMER C ON WT.CUSTOMERID = C.CUSTOMERID JOIN FP_Service s ON WT.ServiceID = s.ServiceID WHERE WT.staffID IS NOT null;";
 				using (SqlCommand command = new SqlCommand(query, connection))
 				{
 					using (SqlDataReader reader = command.ExecuteReader())

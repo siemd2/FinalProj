@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProj.Data.Models
 {
+
+// this class creates a work ticket. task ID, customer, staff id, task name and service date are the attributes that make up a work ticket in the context of this program.
+
 	public class WorkTicket
 	{
 		private int taskId;

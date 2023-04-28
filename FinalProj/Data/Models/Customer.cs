@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
+
+// this class creates a customer. An id, name, phone, email and adress are the attributes that make up a customer in the context of this program. 
 {	
-	//   implements  IUser interface
+	//   inherits from IUser interface
 	public class Customer : IUser
 	{
 		private int id;

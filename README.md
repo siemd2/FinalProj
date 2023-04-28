@@ -4,7 +4,8 @@ FinalProj is our CPRG-211 course final project.
 FinalProj is an automotive service management application that streamlines appointment booking, customer management, inventory management, and task management for technicians.
 This .NET MAUI Blazor Hybrid project also considers multi-device responsiveness and UI design for use on the desktop or phone. 
 This application also generates data dynamically by refreshing components and fetching new data from the database.
-Presentation Video Link: https://www.youtube.com/watch?v=--FMh7JCEro&ab_channel=IsaacBean
+#####Presentation Video
+Link: https://www.youtube.com/watch?v=--FMh7JCEro&ab_channel=IsaacBean
 
 ## Features ✨
 - Customer Management: Add customers, generate unique IDs and save customer data to the database.

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
+
+// this class creates a staff member. ID, name, phone, email are the attributes that make up a staff member in the context of this program.
+
 {
-	// implements Icomponent Interface 
+	// inherits Icomponent Interface 
 	public class Staff : IUser
 	{
 		private int id;

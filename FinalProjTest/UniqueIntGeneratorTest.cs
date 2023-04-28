@@ -16,7 +16,7 @@ namespace FinalProjTest
 		public void SetUp()
 		{
 			// Get the file path for test unique IDs storage
-			_filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Resources\\Assets\\TestUniqueIDs.txt");
+		_filePath = @"C:\Users\siem3\OneDrive\Desktop\FinalProj\FinalProj\Resources\Assets\TestUniqueIDs.txt";
 			UniqueIntGenerator.FilePath = _filePath;
 
 			// Ensure the test file is empty before each test

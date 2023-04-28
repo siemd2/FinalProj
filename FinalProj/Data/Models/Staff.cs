@@ -10,7 +10,7 @@ namespace FinalProj.Data.Models
 // this class creates a staff member. ID, name, phone, email are the attributes that make up a staff member in the context of this program.
 
 {
-	// inherits Icomponent Interface 
+	// inherits Iuser Interface 
 	public class Staff : IUser
 	{
 		private int id;

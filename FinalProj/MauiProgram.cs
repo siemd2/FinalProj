@@ -27,7 +27,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<UniqueIntGenerator>();
 
 
-		#if DEBUG
+#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 		#endif
 		

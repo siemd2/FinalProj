@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
-{
+{	// implemetns Icomponent interface 
 	public class MiscellaneousItem : IComponent
 	{
 		private int partId;
@@ -18,7 +18,8 @@ namespace FinalProj.Data.Models
 		public string PartName { get => partName; set => partName = value; }
 		public int AmountInstock { get => amountInstock; set => amountInstock = value; }
 		public string Condition { get => condition; set => condition = value; }
-
+		
+		// creates MiscellaneousItem object
 		public MiscellaneousItem(int partId, string partName, int instock, string condition)
 		{
 			this.partId = partId;
@@ -27,6 +28,7 @@ namespace FinalProj.Data.Models
 			this.condition = condition;
 		}
 
+		// constructor
 		public MiscellaneousItem()
 		{
 		}

@@ -11,8 +11,7 @@ namespace FinalProj.Data.Models
         private int id;
         private string name;
         private VehiclePart part;
-        private MiscellaneousItem miscellaneousItem;
-        //private VehiclePart vehiclePart;
+        private MiscellaneousItem miscellaneousItem; // associates with MiscellaneousItem class
         private int timeRequire;
         private decimal price;
         private string description;
@@ -21,17 +20,18 @@ namespace FinalProj.Data.Models
         public string Name { get => name; set => name = value; }
         public VehiclePart Part { get => part; set => part = value; }
         public MiscellaneousItem MiscellaneousItem { get => miscellaneousItem; set => miscellaneousItem = value; }
-        //public VehiclePart VehiclePart { get => vehiclePart; set => vehiclePart = value; }
         public int TimeRequire { get => timeRequire; set => timeRequire = value; }
         public decimal Price { get => price; set => price = value; }
 		public string Description { get => description; set => description = value; }
 
-		public Service(int serviceId, string name)
+	    // id and name cunstructor 
+	    public Service(int serviceId, string name)
         {
             Id = serviceId;
             Name = name;
         }
-
+	
+	// creates Service object 
         public Service(int id, string name, decimal price, int time, string desc)
         {
             Id = id;

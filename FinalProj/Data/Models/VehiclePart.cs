@@ -7,6 +7,7 @@ using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
 {
+	// implemetns Icomponent interface 
 	public class VehiclePart : IComponent
 	{
 		private int partId;
@@ -22,7 +23,9 @@ namespace FinalProj.Data.Models
 		public string Condition { get => condition; set => condition = value; }
 		public string ArriveDate { get => arriveDate; set => arriveDate = value; }
 		public string MakeModelYear { get => makeModelYear; set => makeModelYear = value; }
-
+		
+		
+		// creates vehiclePart Object
 		public VehiclePart(int partId, string partName, int amountInstock, string condition, string arriveDate)
 		{
 			this.partId = partId;
@@ -31,9 +34,11 @@ namespace FinalProj.Data.Models
 			this.condition = condition;
 			this.arriveDate = arriveDate;
 		}
-
+		
+		// empty constructor
 		public VehiclePart() { }
-
+		
+		// partID constructor 
 		public VehiclePart(int partID)
 		{
 			partId = partID;

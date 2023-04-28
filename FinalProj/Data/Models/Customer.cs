@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
-{	//   implements  IUser interface
+{	
+	//   implements  IUser interface
 	public class Customer : IUser
 	{
 		private int id;
@@ -29,6 +30,8 @@ namespace FinalProj.Data.Models
 			phone = phoneNumber;
 			this.email = email;
 			this.address = address;
+			
+		// creates customer object
 		}
 		public Customer(int userID, string userName, int phoneNumber, string email)
 		{
@@ -37,6 +40,8 @@ namespace FinalProj.Data.Models
 			phone = phoneNumber;
 			this.email = email;
 		}
+		
+		// empty customer constructor
 		public Customer() { }
 	}
 }

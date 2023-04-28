@@ -7,6 +7,7 @@ using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
 {
+	// implements Icomponent Interface 
 	public class Staff : IUser
 	{
 		private int id;
@@ -25,7 +26,7 @@ namespace FinalProj.Data.Models
             
         }
 
-        // Constructor with four arguments
+        // creates staff object
         public Staff(int id, string name, int phone, string email)
         {
             this.id = id;

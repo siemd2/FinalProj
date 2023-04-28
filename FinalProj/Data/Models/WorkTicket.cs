@@ -9,10 +9,10 @@ namespace FinalProj.Data.Models
 	public class WorkTicket
 	{
 		private int taskId;
-		private Customer customer;
+		private Customer customer; // associates with customer class
 		private int staffId;
 		private string taskName;
-		private Service service;
+		private Service service; // associates with Service class 
 		private string serviceDate;
 
 		public int TicketId { get => taskId; set => taskId = value; }
@@ -30,7 +30,9 @@ namespace FinalProj.Data.Models
 			this.service = service;
 			this.serviceDate = serviceDate;
 		}
-
+		
+		
+		//creates WorkTicket Object
 		public WorkTicket(int taskId, int staffId, int customerId, int serviceId, string serviceDate,
 			string customerName, int phoneNumber, string email, string address, string serviceName)
 		{
@@ -41,6 +43,7 @@ namespace FinalProj.Data.Models
 			ServiceDate = serviceDate;
 		}
 
+		// empty constructor
 		public WorkTicket() { }
 	}
 }

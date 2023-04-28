@@ -10,11 +10,12 @@ using Microsoft.Data.SqlClient;
 
 namespace FinalProj.Data.Controllers
 {
+	//This class mainly use in TechnicianWorkSchedule.razor page and
+	//contain methods that run sql scripts to the database when call
 	public class WorkScheduling
 	{
 		//We need to make a query for this before I can finish this
 		//Query the database for available workticket
-
 		public List<WorkTicket> QueryAllWorkTicket()
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
@@ -56,6 +57,7 @@ namespace FinalProj.Data.Controllers
 			return ticketList;
 		}
 		
+		//Update a work ticket in the DB with a new staff ID
 		public void UpdateWorkTicket(WorkTicket workTicket, int newStaffId)
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";

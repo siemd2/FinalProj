@@ -9,6 +9,9 @@ using Microsoft.Data.SqlClient;
 
 namespace FinalProj.Data.Controllers
 {
+	//This class is mainly use in SchedulingCustomer.razor page and
+	//contain methods that run sql scripts to the database when call
+	//to save the ticket into the DB
 	public class WorkBooking
 	{
 		//Create a new work ticket by taking parameter from the front end
@@ -19,6 +22,7 @@ namespace FinalProj.Data.Controllers
 		}
 
 		//Receive a WorkTicket Object and Format it into a sql script to save to the DB
+		//by populate and running a sql script
 		public void SaveTicketToDatabase(WorkTicket ticket)
 		{
 			if (ticket == null)

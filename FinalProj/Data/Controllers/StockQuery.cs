@@ -9,10 +9,13 @@ using Microsoft.Data.SqlClient;
 
 namespace FinalProj.Data.Controllers
 {
+	//This controler class is mainly use in InventoryManagement.razor page and
+	//contain methods that run sql scripts to the database when call
+	//and return items information in the DB to check what is instock
 	public class StockQuery
 	{
-		//Make sure to make the front end split into checking for vehiclepart or miscitem
-		//Not Complete
+		//Receive Query For one specific chosen vehicle part by it ID
+		//and return a VehiclePart object contain all attributes return from the DB
 		public VehiclePart VehiclePartQuery(VehiclePart checkPart)
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
@@ -51,7 +54,8 @@ namespace FinalProj.Data.Controllers
 			}
 		}
 
-		//Query For one specific Misc Item by it ID
+		//Receive Query For one specific chosen Misc Item by it ID
+		//and return a MiscellaneousItem object contain all attributes return from the DB
 		public MiscellaneousItem MiscPartQuery(MiscellaneousItem item)
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
@@ -88,6 +92,7 @@ namespace FinalProj.Data.Controllers
 		}
 
 		//Query for all available vehiclePart
+		//and return them as a list
 		public List<VehiclePart> QueryAllVehiclePart()
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
@@ -123,7 +128,8 @@ namespace FinalProj.Data.Controllers
 			}
 			return vehiclePartList;
 		}
-		//Query All Misc Item
+		//Query the DB for all Misc Item
+		//and return them as a list
 		public List<MiscellaneousItem> QueryAllMiscItem()
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";

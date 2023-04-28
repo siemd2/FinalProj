@@ -9,9 +9,12 @@ using Microsoft.Data.SqlClient;
 
 namespace FinalProj.Data.Controllers
 {
+    //Customer management class mainly use in CustomerManagement.razor page and
+    //contain methods that run sql scripts to the database when call
 	public class CustManagement
 	{
-		//Receive a Customer object and change it into a sql script and save to the DB
+		//Receive a Customer object and load the Customer object
+        //attributes (Id, Name, Phone, Email, Address) into a sql script and save to the DB
 		public void SaveCustomerToDB(Customer customer)
 		{			
 				string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";

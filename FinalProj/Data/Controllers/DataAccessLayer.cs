@@ -8,10 +8,18 @@ using FinalProj.Data.Models;
 
 namespace FinalProj.Data
 {
+	//This class contain method to be use by multiple front end pages
+	//Method includes
+	//Get all customer info from the database
+	//Get all staff from the database
+	//Get a list of all services registered in the database
 	public class DataAccessLayer
 	{
+		//Connection string that all the method use to connect to the database
 		private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
 
+		//Connect to the DB and find all Customer registered in the database
+		//and return them in a list
 		public List<Customer> GetAllCustomers()
 		{
 			List<Customer> customers = new List<Customer>();
@@ -41,6 +49,8 @@ namespace FinalProj.Data
 			return customers;
 		}
 
+		//Connect to the DB and find all Staff registered in the database
+		//and return them in a list
 		public List<Staff> GetAllStaff()
 		{
 			List<Staff> staffList = new List<Staff>();
@@ -74,6 +84,8 @@ namespace FinalProj.Data
 			return staffList;
 		}
 
+		//Connect to the DB and find all Services registered in the database
+		//and return them in a list
 		public List<Service> lServices()
 		{
 			List<Service> services = new List<Service>();

@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using FinalProj.Data.Interfaces;
 
+// this class creates a miscellaneous item. A part ID, part name, amount in stock and condition are the attributes that make up a miscellaneous item in the context of this program. 
+
 namespace FinalProj.Data.Models
-{	// implemetns Icomponent interface 
+{	// inherits from Icomponent interface 
 	public class MiscellaneousItem : IComponent
 	{
 		private int partId;

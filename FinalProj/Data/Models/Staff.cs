@@ -26,7 +26,7 @@ namespace FinalProj.Data.Models
             
         }
 
-        // Constructor with four arguments
+        // creates staff object
         public Staff(int id, string name, int phone, string email)
         {
             this.id = id;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
-{
+{	//   implements  IUser interface
 	public class Customer : IUser
 	{
 		private int id;
@@ -21,7 +21,7 @@ namespace FinalProj.Data.Models
 		public string Email { get => email; set => email = value; }
 		public string Address { get => address; set => address = value; }
 
-
+		// Creates a customer object
 		public Customer(int userID, string userName, int phoneNumber, string email, string address)
 		{
 			id = userID;

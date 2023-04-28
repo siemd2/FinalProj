@@ -24,13 +24,14 @@ namespace FinalProj.Data.Models
         public decimal Price { get => price; set => price = value; }
 		public string Description { get => description; set => description = value; }
 
-		public Service(int serviceId, string name)
+	    // id and name cunstructor 
+	    public Service(int serviceId, string name)
         {
             Id = serviceId;
             Name = name;
         }
 	
-	// creates Service 
+	// creates Service object 
         public Service(int id, string name, decimal price, int time, string desc)
         {
             Id = id;

@@ -1,4 +1,5 @@
 ﻿@page "/technicianworkschedule"
+@using System.Diagnostics
 @using FinalProj.Data.Models
 @using FinalProj.Data.Controllers
 @using FinalProj.Data
@@ -34,9 +35,9 @@
 
 <style>
 	hr {
-		border: none;
-		border-top: 3px solid black;
-		margin: 20px 0;
+	border: none;
+	border-top: 3px solid black;
+	margin: 20px 0;
 	}
 </style>
 
@@ -45,11 +46,11 @@
 
 <h4>In Progress Tasks:</h4>
 <select class="form-select" @bind="SelectedInProgressTask" aria-label="Default select example">
-		<option selected disabled value="">Choose Task</option>
-		@foreach (var task in tasksInProgress)
-		{
-			<option value="@task.TicketId">@task.Service.Name</option>
-		}
+	<option selected disabled value="">Choose Task</option>
+	@foreach (var task in tasksInProgress)
+	{
+		<option value="@task.TicketId">@task.Service.Name</option>
+	}
 </select>
 <br />
 <div class="input-group">
@@ -79,6 +80,15 @@
 	{
 		staffMembers = dataAccessLayer.GetAllStaff();
 		tasksToDo = ws.QueryAllWorkTicket();
+		// Log the data to the console
+		Debug.WriteLine("Number of tasks: " + tasksToDo.Count);
+		foreach (var task in tasksToDo)
+		{
+			Debug.WriteLine("Task ID: " + task.TicketId + ", Service Name: " + task.Service.Name);
+		}
+
+		// force the refresh
+		StateHasChanged();
 	}
 
 	public void BookTask()
@@ -99,7 +109,7 @@
 	{
 		if (SelectedInProgressTask.HasValue)
 		{
-			WorkTicket selectedTask = tasksInProgress.FirstOrDefault(t => t.TicketId == SelectedTaskId.Value);
+			WorkTicket selectedTask = tasksInProgress.FirstOrDefault(t => t.TicketId == SelectedInProgressTask.Value);
 			if (selectedTask != null)
 			{
 				tasksInProgress.Remove(selectedTask);

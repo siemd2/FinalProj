@@ -23,7 +23,7 @@ namespace FinalProj.Data.Controllers
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
-				string query = "SELECT wt.workticketid, wt.staffid, wt.customerid, wt.serviceid, wt.servicedate, c.customername, c.phonenumber, c.email, c.address, s.servicename FROM FP_WORKTICKET WT JOIN FP_CUSTOMER C ON WT.CUSTOMERID = C.CUSTOMERID JOIN FP_Service s ON WT.ServiceID = s.ServiceID WHERE wt.staffID = null;";
+				string query = "SELECT wt.workticketid, wt.staffid, wt.customerid, wt.serviceid, wt.servicedate, c.customername, c.phonenumber, c.email, c.address, s.servicename FROM FP_WORKTICKET WT JOIN FP_CUSTOMER C ON WT.CUSTOMERID = C.CUSTOMERID JOIN FP_Service s ON WT.ServiceID = s.ServiceID;";
 				using (SqlCommand command = new SqlCommand(query, connection))
 				{
 					using (SqlDataReader reader = command.ExecuteReader())

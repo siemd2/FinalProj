@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
+
+// this class creates a vehicle part. part ID, part name, amount in stock, condition, arrive date and make/model/year are the attributes that make up a vehicle part in the context of this program.
+
 {
-	// implemetns Icomponent interface 
+	// inherits from Icomponent interface 
 	public class VehiclePart : IComponent
 	{
 		private int partId;

@@ -14,7 +14,7 @@ This .NET MAUI Blazor project also considers multi-device responsiveness and UI 
 ### Prerequisites
 - [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/)
-- Microsoft SQL Server Management Studio
+- [Microsoft SQL Server Management Studio](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)
 
 ### Setup Steps
 1. Clone the repository to your local machine.

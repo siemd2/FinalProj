@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace FinalProj.Data.Models
 {
+
+// this class creates a service. ID, name, vehiclepart, miscellaneous item, time required, price, description in stock are the attributes that make up a service in the context of this program. 
     public class Service
     {
         private int id;

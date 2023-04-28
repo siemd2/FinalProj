@@ -7,6 +7,7 @@ using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
 {
+	// implements Icomponent Interface 
 	public class Staff : IUser
 	{
 		private int id;

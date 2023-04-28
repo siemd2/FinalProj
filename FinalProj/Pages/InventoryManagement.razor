@@ -64,8 +64,15 @@
 
 	protected override void OnInitialized()
 	{
-		autoParts = stockQuery.QueryAllVehiclePart();
-		miscParts = stockQuery.QueryAllMiscItem();
+		try
+		{
+			autoParts = stockQuery.QueryAllVehiclePart();
+			miscParts = stockQuery.QueryAllMiscItem();
+		}
+		catch(Exception e)
+		{
+			Application.Current.MainPage.DisplayAlert("No Item Found", "There were no item found in the database", "OK");
+		}
 	}
 
 	private void LoadSelectedAutoPart(ChangeEventArgs e)

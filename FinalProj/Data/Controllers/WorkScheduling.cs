@@ -45,6 +45,11 @@ namespace FinalProj.Data.Controllers
 							ticketList.Add(ticket);
 
 						}
+						if(ticketList.Count > 0) { }
+						else 
+						{
+							throw new Exception();
+						}
 					}
 				}
 			}

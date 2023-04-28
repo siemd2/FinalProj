@@ -18,30 +18,37 @@ namespace FinalProj.Data.Controllers
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
 			VehiclePart part = new VehiclePart();
 
-			using (SqlConnection connection = new SqlConnection(connectionString))
+			if (checkPart != null)
 			{
-				connection.Open();
-				string query = "SELECT ItemID, ITEMNAME, AMOUNTINSTOCK, CONDITION, ARRIVALDATE, MAKEMODELYEAR FROM FP_VehiclePart;";
-
-				using (SqlCommand command = new SqlCommand(query, connection))
+				using (SqlConnection connection = new SqlConnection(connectionString))
 				{
-					SqlParameter parameter1 = new SqlParameter("@checkitemid", checkPart.PartId);
-					command.Parameters.Add(parameter1);
-					using (SqlDataReader reader = command.ExecuteReader())
+					connection.Open();
+					string query = "SELECT ItemID, ITEMNAME, AMOUNTINSTOCK, CONDITION, ARRIVALDATE, MAKEMODELYEAR FROM FP_VehiclePart;";
+
+					using (SqlCommand command = new SqlCommand(query, connection))
 					{
-						while (reader.Read())
+						SqlParameter parameter1 = new SqlParameter("@checkitemid", checkPart.PartId);
+						command.Parameters.Add(parameter1);
+						using (SqlDataReader reader = command.ExecuteReader())
 						{
-							part.PartId = (int)reader.GetDecimal(0);
-							part.PartName = reader.GetString(1);
-							part.AmountInstock = (int)reader.GetDecimal(2);
-							part.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
-							part.ArriveDate = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
-							part.MakeModelYear = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
+							while (reader.Read())
+							{
+								part.PartId = (int)reader.GetDecimal(0);
+								part.PartName = reader.GetString(1);
+								part.AmountInstock = (int)reader.GetDecimal(2);
+								part.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
+								part.ArriveDate = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
+								part.MakeModelYear = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
+							}
 						}
 					}
 				}
+				return part;
 			}
-			return part;
+			else
+			{
+				throw new ArgumentNullException(nameof(checkPart));
+			}
 		}
 
 		//Query For one specific Misc Item by it ID
@@ -49,29 +56,35 @@ namespace FinalProj.Data.Controllers
 		{
 			string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=FinalProjOOP;Integrated Security=True";
 			MiscellaneousItem miscItem = new MiscellaneousItem();
-
-			using (SqlConnection connection = new SqlConnection(connectionString))
+			if (item != null)
 			{
-				connection.Open();
-				string query = "SELECT itemid, itemName, amountinstock, condition FROM FP_MISCITEM WHERE itemid = @checkitemid;";
-
-				using (SqlCommand command = new SqlCommand(query, connection))
+				using (SqlConnection connection = new SqlConnection(connectionString))
 				{
-					SqlParameter parameter1 = new SqlParameter("@checkitemid", item.PartId);
-					command.Parameters.Add(parameter1);
-					using (SqlDataReader reader = command.ExecuteReader())
+					connection.Open();
+					string query = "SELECT itemid, itemName, amountinstock, condition FROM FP_MISCITEM WHERE itemid = @checkitemid;";
+
+					using (SqlCommand command = new SqlCommand(query, connection))
 					{
-						while (reader.Read())
+						SqlParameter parameter1 = new SqlParameter("@checkitemid", item.PartId);
+						command.Parameters.Add(parameter1);
+						using (SqlDataReader reader = command.ExecuteReader())
 						{
-							miscItem.PartId = (int)reader.GetDecimal(0);
-							miscItem.PartName = reader.GetString(1);
-							miscItem.AmountInstock = (int)reader.GetDecimal(2);
-							miscItem.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
+							while (reader.Read())
+							{
+								miscItem.PartId = (int)reader.GetDecimal(0);
+								miscItem.PartName = reader.GetString(1);
+								miscItem.AmountInstock = (int)reader.GetDecimal(2);
+								miscItem.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
+							}
 						}
 					}
 				}
+				return miscItem;
 			}
-			return miscItem;
+			else
+			{
+				throw new ArgumentNullException(nameof(item));
+			}
 		}
 
 		//Query for all available vehiclePart
@@ -99,6 +112,11 @@ namespace FinalProj.Data.Controllers
 							part.MakeModelYear = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
 
 							vehiclePartList.Add(part);
+						}
+						if(vehiclePartList.Count > 0) { }
+						else
+						{
+							throw new Exception();
 						}
 					}
 				}
@@ -128,6 +146,11 @@ namespace FinalProj.Data.Controllers
 							miscItem.Condition = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
 
 							miscList.Add(miscItem);
+						}
+						if (miscList.Count > 0) { }
+						else
+						{
+							throw new Exception();
 						}
 					}
 				}

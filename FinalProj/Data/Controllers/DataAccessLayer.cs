@@ -62,6 +62,11 @@ namespace FinalProj.Data
 
 							staffList.Add(new Staff(staffId, staffName, phoneNumber, email));
 						}
+						if(staffList.Count > 0) { }
+						else 
+						{
+							throw new Exception();
+						}
 					}
 				}
 			}

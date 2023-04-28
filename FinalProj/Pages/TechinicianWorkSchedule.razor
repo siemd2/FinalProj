@@ -3,6 +3,7 @@
 @using FinalProj.Data.Models
 @using FinalProj.Data.Controllers
 @using FinalProj.Data
+@using Microsoft.Maui.Controls
 @inject DataAccessLayer DAL
 @inject WorkBooking wb
 
@@ -78,9 +79,16 @@
 
 	protected override void OnInitialized()
 	{
-		staffMembers = dataAccessLayer.GetAllStaff();
-		tasksToDo = ws.QueryAllWorkTicket();
-		// Log the data to the console
+		try
+		{
+			staffMembers = dataAccessLayer.GetAllStaff();
+			tasksToDo = ws.QueryAllWorkTicket();
+		}
+		catch (Exception e)
+		{
+			Application.Current.MainPage.DisplayAlert("No Item Found", "There were no item found in the database", "OK");
+		}
+	// Log the data to the console
 		Debug.WriteLine("Number of tasks: " + tasksToDo.Count);
 		foreach (var task in tasksToDo)
 		{
@@ -95,13 +103,15 @@
 	{
 		if (SelectedTaskId.HasValue && StaffId.HasValue)
 		{
+
+
 			WorkTicket selectedTask = tasksToDo.FirstOrDefault(t => t.TicketId == SelectedTaskId.Value);
 			if (selectedTask != null)
 			{
 				tasksToDo.Remove(selectedTask);
 				tasksInProgress.Add(selectedTask);
 				StateHasChanged(); // trigger re-rerender
-			}
+			}			
 		}
 	}
 

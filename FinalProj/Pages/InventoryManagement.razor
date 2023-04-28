@@ -3,6 +3,13 @@
 @using FinalProj.Data.Controllers
 @inject StockQuery stockQuery
 
+<!--
+	/*
+	* This is the Inventory Management page for the application.
+	* It displays a list of available auto parts and miscellaneous items in the inventory, and allows users to view the stock amount for each item.
+	 */
+-->
+
 <h3>Inventory Management</h3>
 <br />
 <br />
@@ -55,6 +62,10 @@
 }
 
 @code {
+	/*
+	* The @code block contains the properties and methods related to
+	* fetching and displaying inventory data for auto parts and miscellaneous items.
+	*/
 	int? selectedAutoPartId;
 	int? selectedMiscPartId;
 	VehiclePart selectedAutoPart;

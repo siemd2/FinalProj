@@ -9,7 +9,6 @@ namespace FinalProj.Data.Controllers
 	// to call method :
 	// int Id = UniqueIntGenerator.GenerateUniqueInt();
 	// int Id2 = UniqueIntGenerator.GenerateUniqueInt();
-	// etc
 
 	/*
 	SUMMARY:

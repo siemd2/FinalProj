@@ -7,7 +7,7 @@ using FinalProj.Data.Interfaces;
 
 namespace FinalProj.Data.Models
 {	
-	//   implements  IUser interface
+	// implements  IUser interface
 	public class Customer : IUser
 	{
 		private int id;

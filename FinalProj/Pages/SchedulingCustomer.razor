@@ -5,7 +5,10 @@
 @inject DataAccessLayer DAL
 @inject WorkBooking wb
 
-
+<!-- /*
+ * This is the Appointment Booking System page for the application.
+ * It allows users to book appointments by selecting a customer, staff member, and service, as well as specifying the date and time.
+ */ -->
 
 <h3>Appointment Booking System</h3>
 <br />
@@ -60,6 +63,10 @@
 <br />
 
 @code {
+	/*
+	* The @code block contains the properties and methods related to
+	* retrieving data for customers, staff members, and services, and handling the appointment booking process.
+	*/
 	// set initial value to  null using ?
 	int? CustomerId { get; set; }
 	int? StaffId { get; set; }

@@ -6,7 +6,12 @@
 @using Microsoft.Maui.Controls
 @inject DataAccessLayer DAL
 @inject WorkBooking wb
-
+<!--
+/*
+ * This is the Technician Task Management System page for the application.
+ * It allows users to book tasks for technicians, and mark tasks as completed.
+ */
+-->
 <h3>Techinician Task Management System</h3>
 <br />
 <br />
@@ -66,6 +71,11 @@
 <br />
 
 @code {
+	/*
+	* The @code block contains the properties and methods related to
+	* managing tasks for technicians, booking tasks, and marking tasks as completed.
+	*/
+	// Data properties
 	int? StaffId { get; set; }
 	int? SelectedTaskId { get; set; }
 	int? SelectedInProgressTask { get; set; }
@@ -88,7 +98,7 @@
 		{
 			Application.Current.MainPage.DisplayAlert("No Item Found", "There were no item found in the database", "OK");
 		}
-	// Log the data to the console
+		// Log the data to the console
 		Debug.WriteLine("Number of tasks: " + tasksToDo.Count);
 		foreach (var task in tasksToDo)
 		{

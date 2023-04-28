@@ -2,39 +2,51 @@
 @using FinalProj.Data.Models
 @using FinalProj.Data.Controllers
 
+<!-- /*
+ * This is the Customer Management System page for the application.
+ * It provides an interface for adding new customers and generating unique customer IDs.
+ */ -->
+
+<!-- Heading -->
 <h3>Customer Management System</h3>
 <br />
 <br />
-<!-- error message -->
+<!-- error message for incomplete form submission -->
 <p class="text-danger" hidden="@(!ShowErrorMessage)">Please select a customer, staff member, and service before attempting to book an appointment.</p>
 <br />
 
+<!-- Customer ID input field-->
 <div class="input-group">
 	<span class="input-group-text">Customer ID:</span>
 	<input type="number" @bind="CustomerId" class="form-control" />
 </div>
 <br />
+<!-- Button to generate a new unique customer ID -->
 <div>
 	<button type="button" class="btn btn-outline-primary" @onclick="GenerateID">Generate ID</button>
 	<span class="generated-id-label">New Id: </span>
 	<span class="generated-id">@NewID</span>
 </div>
 <br />
+<!-- Customer Full Name input field -->
 <div class="input-group">
 	<span class="input-group-text">Customer Full Name:</span>
 	<input type="text" @bind="CustomerName" class="form-control" />
 </div>
 <br />
+<!-- Customer Phone Number input field -->
 <div class="input-group">
 	<span class="input-group-text">Customer Phone #:</span>
 	<input type="number" @bind="CustomerPhone" class="form-control" />
 </div>
 <br />
+<!-- Customer Email input field -->
 <div class="input-group">
 	<span class="input-group-text">Customer E-mail:</span>
 	<input type="email" @bind="CustomerEmail" class="form-control" />
 </div>
 <br />
+<!-- Customer Address input field -->
 <div class="input-group">
 	<span class="input-group-text">Customer Address:</span>
 	<input type="text" @bind="CustomerAddress" class="form-control" />
@@ -44,7 +56,7 @@
 <button type="button" class="btn btn-outline-success" @onclick="AddCustomer">Add Customer</button>
 <br />
 <br />
-<!-- confirmation message -->
+<!-- Confirmation message for successful customer addition -->
 <p class="text-success" hidden="@(!ShowSuccessMessage)">Customer Added To DataBase.</p>
 <br />
 <br />
@@ -52,6 +64,11 @@
 
 
 @code {
+	/*
+	* The @code block contains the properties and methods related to
+	* managing customer data and controlling the display of messages on the page.
+	*/
+	// customer data properties
 	string CustomerId { get; set; }
 	string CustomerName { get; set; }
 	string CustomerPhone { get; set; }
@@ -62,13 +79,17 @@
 	Customer customer = new Customer();
 	CustManagement custManagement = new CustManagement();
 
+	// flags to control error and success message popup
 	bool ShowSuccessMessage { get; set; }
 	bool ShowErrorMessage { get; set; }
 
+	// function to add customer to database
 	public void AddCustomer()
 	{
+		// check if all fields are filled in
 		if (CustomerId != null && CustomerName != null && CustomerPhone != null && CustomerEmail != null && CustomerAddress != null)
 		{
+			// Parse and set customer data
 			int.TryParse(CustomerId, out int id);
 			int.TryParse(CustomerPhone, out int phone);
 			customer.UserId = id;
@@ -77,13 +98,16 @@
 			customer.Email = string.IsNullOrEmpty(CustomerEmail) ? string.Empty : CustomerEmail;
 			customer.Address = string.IsNullOrEmpty(CustomerAddress) ? string.Empty : CustomerAddress;
 
+			// save customer
 			custManagement.SaveCustomerToDB(customer);
 
+			// adjust error alert flags
 			ShowErrorMessage = false;
 			ShowSuccessMessage = true;
 		}
 		else
 		{
+			// adjust error alert flags
 			ShowErrorMessage = true;
 			ShowSuccessMessage = false;
 		}

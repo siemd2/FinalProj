@@ -22,7 +22,7 @@ Link: https://www.youtube.com/watch?v=--FMh7JCEro&ab_channel=IsaacBean
 ### Setup Steps
 1. Clone the repository to your local machine.
 2. Open project in visual studio.
-3. Using MSSMS create Database named FinalProjOOP.
+3. Using SSMS create Database named FinalProjOOP.
 4. Run included table creation and table population sql scripts in order.
 
 ### Running the Program

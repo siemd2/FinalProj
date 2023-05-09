@@ -25,7 +25,7 @@ This application also generates data dynamically by refreshing components and fe
 4. Run included table creation and table population sql scripts in order.
 
 ### Running the Program
-- Program can be ran form visal studio
+- Program can be ran from visual studio
 
 ## Usage 🎮
 - To manage customers, navigate to the "Customer Management" page.

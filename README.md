@@ -35,3 +35,5 @@ This application also generates data dynamically by refreshing components and fe
 
 ## License ⚖️
 This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=siemd2)](https://github.com/anuraghazra/github-readme-stats)
